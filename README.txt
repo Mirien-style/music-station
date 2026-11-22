@@ -1,0 +1,1 @@
+上傳 index.html + songs.json + audio/ 到 GitHub，Settings > Pages > Branch main > Save 即可。
