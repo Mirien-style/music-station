@@ -17,7 +17,7 @@ header{position:fixed;top:0;left:0;right:0;z-index:101;background:#111014;text-a
   .wrap .card:last-child{
     order:1;
     position:sticky;
-    top:10px;
+    top:148px;
     z-index:10;
   }  /* 播放器放上面 */}
 .card{background:#1e1c22;border:1px solid #2f2b36;border-radius:18px;padding:16px}
@@ -75,7 +75,8 @@ code{background:#000;padding:2px 6px;border-radius:6px} .how{color:#ddd;line-hei
 <header><h1>✞ Mirien的原創詩歌小站</h1><p></p></header>
 <div class="wrap">
   <div class="card">
-    <div class="controls"><input id="search" placeholder="搜尋歌名…"><select id="filter"><option value="全部">全部</option><option>吉他試唱</option><option>鋼琴演奏</option></select></div>
+    <div class="controls"><input id="search" placeholder="搜尋歌名…">
+    <select id="filterStatus"><option value="全部">全部上架狀態</option><option>已上架</option><option>即將推出</option></select><select id="filter"><option value="全部">全部演奏模式</option><option>吉他試唱</option><option>鋼琴演奏</option></select></div>
     <div id="list"></div>
   </div>
   <div class="card">
@@ -98,8 +99,8 @@ code{background:#000;padding:2px 6px;border-radius:6px} .how{color:#ddd;line-hei
 let songs=[], current=0, auto=true, filtered=[];
 const list=document.getElementById('list'), player=document.getElementById('player');
 async function load(){ const r=await fetch('songs.json'); songs=await r.json(); applyFilter(); play(0); }
-function applyFilter(){ const q=document.getElementById('search').value.trim(); const f=document.getElementById('filter').value;
- filtered=songs.filter(s=>(f==='全部'||s.category===f)&&(!q||(s.work||s.title).includes(q)||s.version.includes(q))); renderList(); }
+function applyFilter(){ const q=document.getElementById('search').value.trim(); const f=document.getElementById('filter').value; const fs=document.getElementById('filterStatus').value;
+ filtered=songs.filter(s=>{ let ok=true; if(fs==='已上架') ok=s.status!=="即將推出"; else if(fs==='即將推出') ok=s.status==="即將推出"; if(f!=='全部') ok=ok&&s.category===f; return ok&&(!q||(s.work||s.title).includes(q)||s.version.includes(q)); }); renderList(); }
 function renderList(){
   list.innerHTML = filtered.map(s => {
     const idx = songs.indexOf(s);
@@ -142,12 +143,22 @@ if(s.lyricsFile){
 } const c=document.getElementById('cover');
 c.style.background = '';
 c.style.backgroundImage = "url('images/cover.jpg')";
-c.textContent = ''; player.src=s.audio; player.play().catch(()=>{}); renderList(); }
-document.getElementById('search').addEventListener('input',applyFilter); document.getElementById('filter').addEventListener('change',applyFilter);
+c.textContent = ''; player.src=s.audio; renderList(); }
+document.getElementById('search').addEventListener('input',applyFilter); 
+document.getElementById('filter').addEventListener('change',applyFilter);
+document.getElementById('filterStatus').addEventListener('change',applyFilter); 
+document.getElementById('filter').addEventListener('change',applyFilter);
 document.getElementById('prev').onclick=()=>play((current-1+songs.length)%songs.length);
 document.getElementById('next').onclick=()=>play((current+1)%songs.length);
 document.getElementById('autoBtn').onclick=(e)=>{auto=!auto; e.target.textContent='連續播放：'+(auto?'開':'關')};
-player.addEventListener('ended',()=>{ if(auto) play((current+1)%songs.length) });
+player.addEventListener('ended',()=>{
+  if(!auto) return;
+  let next = current;
+  for(let k=0;k<songs.length;k++){
+    next = (next+1)%songs.length;
+    if(songs[next].status !== "即將推出"){ play(next); player.play().catch(()=>{}); break; }
+  }
+});
 let lyricsOpen = false;
 const lyricsBox = document.getElementById('lyrics');
 const lyricsBtn = document.getElementById('lyricsToggle');
