@@ -80,7 +80,9 @@ function play(i){ if(!songs[i])return; current=i; const s=songs[i];
     return;
   }
 
-document.getElementById('title').textContent=(s.work||s.title)+' — '+s.version; document.getElementById('meta').textContent = s.note || ''; // 先清空，等等去抓 txt
+document.getElementById('title').textContent=(s.work||s.title)+' — '+s.version; 
+document.getElementById('meta').textContent = s.note || ''; // 先清空，等等去抓 txt
+document.getElementById('credits').innerHTML = '詞：' + (s.lyricist || '—') + '<br>曲：' + (s.composer || '—');
 document.getElementById('lyrics').textContent = '載入中...';
 if(s.lyricsFile){
   fetch(s.lyricsFile).then(r => r.text()).then(t => {
