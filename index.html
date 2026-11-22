@@ -41,15 +41,7 @@ code{background:#000;padding:2px 6px;border-radius:6px} .how{color:#ddd;line-hei
     <h3>歌詞 / 歌曲說明</h3><div class="lyrics" id="lyrics"></div>
   </div>
 </div>
-<div class="wrap" style="grid-template-columns:1fr"><div class="card how">
-<h3>🎵 之後怎麼加新歌？只要 3 步（不用改 index.html）</h3>
-<ol>
-<li>把新的 mp3 上傳到 <code>audio/</code> 資料夾，例如 <code>audio/new-song.mp3</code></li>
-<li>打開 <code>songs.json</code>，複製一首歌的 <code>{ ... }</code> 貼到最後，改 <code>title</code>、<code>version</code>、<code>audio</code>、<code>lyrics</code></li>
-<li>Commit → 等 1 分鐘 → 重新整理網頁，新歌就出現了</li>
-</ol>
-<p>舊的獨立頁面（例如 no-longer/）不用刪除，繼續留著當分享連結就好。</p>
-</div></div>
+
 <script>
 let songs=[], current=0, auto=true, filtered=[];
 const list=document.getElementById('list'), player=document.getElementById('player');
