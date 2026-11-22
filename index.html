@@ -64,7 +64,7 @@ function renderList(){
       <span class="num">${idx+1}</span>
       <span style="flex:1"><b>${s.work}</b><br>
       <small style="color:#bbb">${s.version}</small></span>
-      ${isComing ? `<span class="tag coming-tag">即將推出</span>` : `<span class="tag">${s.category}</span>`}
+      ${isComing ? `<span class="tag coming-tag">即將推出</span>` : `<span class="tag">${s.status}</span>`}
     </button>`
   }).join('');
 }
