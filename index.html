@@ -18,7 +18,7 @@ header{padding:28px 20px 10px;max-width:1100px;margin:auto} header h1{margin:0;f
 .song.active,.song:hover{background:#2a2731;border-color:#ff8a3c}
 .num{width:26px;height:26px;border-radius:50%;background:#333;display:grid;place-items:center;font-size:13px;flex-shrink:0}
 .tag{font-size:12px;background:#ff8a3c;color:#111;padding:3px 8px;border-radius:99px;white-space:nowrap}
-.cover{height:170px;border-radius:14px;display:grid;place-items:center;font-size:44px;font-weight:900;color:#111}
+.cover{height:260px;border-radius:14px;display:grid;place-items:center;font-size:64px;font-weight:900;color:#111;background-size:cover;background-position:center;}
 h2{margin:14px 0 4px;font-size:26px} .sub{color:#bbb;margin:0 0 14px}
 audio{width:100%;margin:10px 0} .btns{display:flex;gap:8px} button{cursor:pointer;background:#ff8a3c;border:0;color:#111;font-weight:700;padding:11px 14px;border-radius:10px}
 button.ghost{background:#2a2731;color:#fff} .lyrics{white-space:pre-wrap;line-height:2;background:#15141a;border-radius:12px;padding:16px;max-height:420px;overflow:auto}
@@ -68,6 +68,10 @@ function play(i){ if(!songs[i])return; current=i; const s=songs[i];
     document.getElementById('meta').textContent = s.note || '即將推出，敬請期待';
     document.getElementById('lyrics').textContent = '這首還在準備中，錄好後就會在這裡上架。';
     document.getElementById('credits').innerHTML = '詞：' + (s.lyricist || '—') + '<br>曲：' + (s.composer || '—');
+    const c1 = document.getElementById('cover');
+    c1.style.backgroundImage = 'none';
+    c1.style.background = s.coverColor || '#ff8a3c';
+    c1.textContent = '♪';
     player.removeAttribute('src');
     player.load();
     renderList();
@@ -84,7 +88,10 @@ if(s.lyricsFile){
   });
 } else {
   document.getElementById('lyrics').textContent = s.lyrics || '';
-} const c=document.getElementById('cover'); c.style.background=s.coverColor||'#ff8a3c'; c.textContent=s.title.slice(0,1); player.src=s.audio; player.play().catch(()=>{}); renderList(); }
+} const c=document.getElementById('cover');
+c.style.background = '';
+c.style.backgroundImage = "url('images/cover.jpg')";
+c.textContent = ''; player.src=s.audio; player.play().catch(()=>{}); renderList(); }
 document.getElementById('search').addEventListener('input',applyFilter); document.getElementById('filter').addEventListener('change',applyFilter);
 document.getElementById('prev').onclick=()=>play((current-1+songs.length)%songs.length);
 document.getElementById('next').onclick=()=>play((current+1)%songs.length);
