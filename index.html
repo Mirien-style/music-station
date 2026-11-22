@@ -67,6 +67,7 @@ function play(i){ if(!songs[i])return; current=i; const s=songs[i];
     document.getElementById('title').textContent = s.work + ' — ' + s.version;
     document.getElementById('meta').textContent = s.note || '即將推出，敬請期待';
     document.getElementById('lyrics').textContent = '這首還在準備中，錄好後就會在這裡上架。';
+    document.getElementById('credits').innerHTML = '詞：' + (s.lyricist || '—') + '<br>曲：' + (s.composer || '—');
     player.removeAttribute('src');
     player.load();
     renderList();
