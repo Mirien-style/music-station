@@ -30,6 +30,8 @@ header{padding:28px 20px 10px;max-width:1100px;margin:auto} header h1{margin:0;f
 h2{margin:14px 0 4px;font-size:26px} .sub{color:#bbb;margin:0 0 14px}
 audio{width:100%;margin:10px 0} .btns{display:flex;gap:8px} button{cursor:pointer;background:#ff8a3c;border:0;color:#111;font-weight:700;padding:11px 14px;border-radius:10px}
 button.ghost{background:#2a2731;color:#fff} .lyrics{white-space:pre-wrap;line-height:2;background:#15141a;border-radius:12px;padding:16px;max-height:420px;overflow:auto}
+.lyrics.collapsed{max-height:0;padding-top:0;padding-bottom:0;overflow:hidden;border:0;}
+.lyrics{transition:max-height 0.3s ease, padding 0.3s ease;}  
 code{background:#000;padding:2px 6px;border-radius:6px} .how{color:#ddd;line-height:1.9} .how li{margin:6px 0}
 </style>
 </head>
@@ -47,7 +49,11 @@ code{background:#000;padding:2px 6px;border-radius:6px} .how{color:#ddd;line-hei
     <audio id="player" controls preload="metadata"></audio>
     <div class="btns"><button id="prev">⏮ 上一首</button><button id="next">下一首 ⏭</button><button class="ghost" id="autoBtn">連續播放：開</button></div>
     <!-- <p id="note" style="color:#bbb"></p> -->
-    <h3>歌詞 / 歌曲說明</h3><div class="lyrics" id="lyrics"></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;">
+  <h3 style="margin:12px 0;">歌詞</h3>
+  <button id="lyricsToggle" class="ghost" style="padding:6px 12px;font-size:13px;">展開 ▼</button>
+</div>
+<div class="lyrics" id="lyrics"></div>
   </div>
 </div>
 
@@ -105,6 +111,26 @@ document.getElementById('prev').onclick=()=>play((current-1+songs.length)%songs.
 document.getElementById('next').onclick=()=>play((current+1)%songs.length);
 document.getElementById('autoBtn').onclick=(e)=>{auto=!auto; e.target.textContent='連續播放：'+(auto?'開':'關')};
 player.addEventListener('ended',()=>{ if(auto) play((current+1)%songs.length) });
+let lyricsOpen = false;
+const lyricsBox = document.getElementById('lyrics');
+const lyricsBtn = document.getElementById('lyricsToggle');
+// 手機版一開始先收起來，電腦版一開始打開
+if(window.innerWidth <= 820){
+  lyricsBox.classList.add('collapsed');
+  lyricsBtn.textContent = '展開 ▼';
+} else {
+  lyricsBtn.textContent = '收起 ▲';
+}
+lyricsBtn.onclick = () => {
+  lyricsOpen = !lyricsOpen;
+  if(lyricsOpen){
+    lyricsBox.classList.remove('collapsed');
+    lyricsBtn.textContent = '收起 ▲';
+  } else {
+    lyricsBox.classList.add('collapsed');
+    lyricsBtn.textContent = '展開 ▼';
+  }
+};
 load();
 </script>
 </body></html>
