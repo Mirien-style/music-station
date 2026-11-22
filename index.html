@@ -80,7 +80,15 @@ function play(i){ if(!songs[i])return; current=i; const s=songs[i];
     return;
   }
 
-document.getElementById('title').textContent=(s.work||s.title)+' — '+s.version; document.getElementById('meta').textContent = s.note || ''; document.getElementById('lyrics').textContent=s.lyrics||''; const c=document.getElementById('cover'); c.style.background=s.coverColor||'#ff8a3c'; c.textContent=s.title.slice(0,1); player.src=s.audio; player.play().catch(()=>{}); renderList(); }
+document.getElementById('title').textContent=(s.work||s.title)+' — '+s.version; document.getElementById('meta').textContent = s.note || ''; // 先清空，等等去抓 txt
+document.getElementById('lyrics').textContent = '載入中...';
+if(s.lyricsFile){
+  fetch(s.lyricsFile).then(r => r.text()).then(t => {
+    document.getElementById('lyrics').textContent = t;
+  });
+} else {
+  document.getElementById('lyrics').textContent = s.lyrics || '';
+} const c=document.getElementById('cover'); c.style.background=s.coverColor||'#ff8a3c'; c.textContent=s.title.slice(0,1); player.src=s.audio; player.play().catch(()=>{}); renderList(); }
 document.getElementById('search').addEventListener('input',applyFilter); document.getElementById('filter').addEventListener('change',applyFilter);
 document.getElementById('prev').onclick=()=>play((current-1+songs.length)%songs.length);
 document.getElementById('next').onclick=()=>play((current+1)%songs.length);
