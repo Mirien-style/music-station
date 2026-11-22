@@ -7,9 +7,11 @@
     "category": "吉他試唱",
     "audio": "audio/yes-i-do-guitar.mp3",
     "coverColor": "#ff8a3c",
-    "status": "即將推出",
     "lyricsFile": "lyrics/yes-i-do.txt",
-    "note": "2026年創作月份不詳"
+    "note": "2026年創作月份不詳",
+    "lyricist": "Mirien",
+    "composer": "Mirien",
+    "status": "即將推出"
   },
   {
     "id": "yes-i-do-piano",
@@ -19,9 +21,11 @@
     "category": "鋼琴演奏",
     "audio": "audio/yes-i-do-piano.mp3",
     "coverColor": "#ff8a3c",
-    "status": "已上架",
     "lyricsFile": "lyrics/yes-i-do.txt",
-    "note": "2026年創作月份不詳"
+    "note": "2026年創作月份不詳",
+    "lyricist": "Mirien",
+    "composer": "Mirien",
+    "status": "已上架"
   },
   {
     "id": "qi-shi-guitar",
@@ -31,9 +35,12 @@
     "category": "吉他試唱",
     "audio": "audio/qi-shi-guitar.mp3",
     "coverColor": "#ffb703",
-    "status": "即將推出",
     "lyricsFile": "lyrics/qi-shi.txt",
-    "note": "2026年創作月份不詳"
+    "note": "2026年創作月份不詳",
+    "lyricist": "Mirien",
+    "composer": "Mirien",
+    "status": "即將推出"
+    
   },
   {
     "id": "qi-shi-piano",
@@ -43,9 +50,11 @@
     "category": "鋼琴演奏",
     "audio": "audio/qi-shi-piano.mp3",
     "coverColor": "#ffb703",
-    "status": "已上架",
     "lyricsFile": "lyrics/qi-shi.txt",
-    "note": "2026年創作月份不詳"
+    "note": "2026年創作月份不詳",
+    "lyricist": "Mirien",
+    "composer": "Mirien",
+    "status": "已上架"
   },
   {
     "id": "ai-de-zhen-di-guitar",
@@ -55,9 +64,11 @@
     "category": "吉他試唱",
     "audio": "audio/ai-de-zhen-di-guitar.mp3",
     "coverColor": "#ff6b9d",
-    "status": "即將推出",
     "lyricsFile": "lyrics/ai-de-zhen-di.txt",
-    "note": "2026年創作月份不詳"
+    "note": "2026年創作月份不詳",
+    "lyricist": "Mirien",
+    "composer": "Mirien",
+    "status": "即將推出"
   },
   {
     "id": "ai-de-zhen-di-piano",
@@ -67,9 +78,11 @@
     "category": "鋼琴演奏",
     "audio": "audio/ai-de-zhen-di-piano.mp3",
     "coverColor": "#ff6b9d",
-    "status": "已上架",
     "lyricsFile": "lyrics/ai-de-zhen-di.txt",
-    "note": "2026年創作月份不詳"
+    "note": "2026年創作月份不詳",
+    "lyricist": "Mirien",
+    "composer": "Mirien",
+    "status": "已上架"
   },
   {
     "id": "wo-ke-mu-ni-guitar",
@@ -79,9 +92,11 @@
     "category": "吉他試唱",
     "audio": "audio/wo-ke-mu-ni-guitar.mp3",
     "coverColor": "#e63946",
-    "status": "即將推出",
     "lyricsFile": "lyrics/wo-ke-mu-ni.txt",
-    "note": "2026年6月創作"
+    "note": "2026年6月創作",
+    "lyricist": "Mirien",
+    "composer": "Mirien",
+    "status": "即將推出"
   },
   {
     "id": "wo-ke-mu-ni-piano",
@@ -91,9 +106,11 @@
     "category": "鋼琴演奏",
     "audio": "audio/wo-ke-mu-ni-piano.mp3",
     "coverColor": "#e63946",
-    "status": "已上架",
     "lyricsFile": "lyrics/wo-ke-mu-ni.txt",
-    "note": "2026年6月創作"
+    "note": "2026年6月創作",
+    "lyricist": "Mirien",
+    "composer": "Mirien",
+    "status": "已上架"
   },
   {
     "id": "shi-ta-guitar",
@@ -103,9 +120,11 @@
     "category": "吉他試唱",
     "audio": "audio/shi-ta-guitar.MP3",
     "coverColor": "#ff8a3c",
-    "status": "已上架",
     "lyricsFile": "lyrics/shi-ta.txt",
-    "note": "2026年創作月份不詳"
+    "note": "2026年創作月份不詳",
+     "lyricist": "Mirien",
+    "composer": "Mirien",
+    "status": "已上架"
   },
   {
     "id": "shi-ta-piano",
@@ -115,9 +134,11 @@
     "category": "鋼琴演奏",
     "audio": "audio/shi-ta-piano.mp3",
     "coverColor": "#ff8a3c",
-    "status": "已上架",
     "lyricsFile": "lyrics/shi-ta.txt",
-    "note": "2026年創作月份不詳"
+    "note": "2026年創作月份不詳",
+     "lyricist": "Mirien",
+    "composer": "Mirien",
+    "status": "已上架"
   },
   {
     "id": "ni-de-ai-guitar",
@@ -127,9 +148,11 @@
     "category": "吉他試唱",
     "audio": "audio/ni-de-ai-guitar.MP3",
     "coverColor": "#ff6b9d",
-    "status": "已上架",
     "lyricsFile": "lyrics/ni-de-ai.txt",
-    "note": "2026年11月創作"
+    "note": "2026年11月創作",
+    "lyricist": "Mirien",
+    "composer": "Mirien",
+    "status": "已上架"
   },
   {
     "id": "-piano",
@@ -139,9 +162,11 @@
     "category": "鋼琴演奏",
     "audio": "audio/ni-de-ai-piano.mp3",
     "coverColor": "#ff6b9d",
-    "status": "已上架",
     "lyricsFile": "lyrics/ni-de-ai.txt",
-    "note": "2026年11月創作"
+    "note": "2026年11月創作",
+     "lyricist": "Mirien",
+    "composer": "Mirien",
+    "status": "已上架"
   },
   {
     "id": "jie-du-full-guitar",
@@ -151,9 +176,11 @@
     "category": "吉他試唱",
     "audio": "audio/jie-du-full-guitar.MP3",
     "coverColor": "#7c5cff",
-    "status": "已上架",
     "lyricsFile": "lyrics/jie-du-full.txt",
-    "note": "2026年11月創作"
+    "note": "2026年11月創作",
+     "lyricist": "Mirien",
+    "composer": "Mirien",
+    "status": "已上架"
   },
   {
     "id": "jie-du-full-piano",
@@ -163,9 +190,11 @@
     "category": "鋼琴演奏",
     "audio": "audio/jie-du-full-piano.mp3",
     "coverColor": "#7c5cff",
-    "status": "已上架",
     "lyricsFile": "lyrics/jie-du-full.txt",
-    "note": "2026年11月創作"
+    "note": "2026年11月創作",
+     "lyricist": "Mirien",
+    "composer": "Mirien",
+    "status": "已上架"
   },
   {
     "id": "jie-du-lyrics-only-guitar",
@@ -175,9 +204,11 @@
     "category": "吉他試唱",
     "audio": "audio/jie-du-lyrics-only-guitar.mp3",
     "coverColor": "#3a86ff",
-    "status": "即將推出",
     "lyricsFile": "lyrics/jie-du-lyrics-only.txt",
-    "note": "創作年份不詳"
+    "note": "創作年份不詳",
+    "lyricist": "Mirien",
+    "composer": "Mirien",
+    "status": "即將推出"
   },
   {
     "id": "jie-du-lyrics-only-piano",
@@ -187,8 +218,10 @@
     "category": "鋼琴演奏",
     "audio": "audio/jie-du-lyrics-only-piano.mp3",
     "coverColor": "#3a86ff",
-    "status": "已上架",
     "lyricsFile": "lyrics/jie-du-lyrics-only.txt",
-    "note": "創作年份不詳"
+    "note": "創作年份不詳",
+    "lyricist": "Mirien",
+    "composer": "Mirien",
+    "status": "已上架"
   }
 ]
