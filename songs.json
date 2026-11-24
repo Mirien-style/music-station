@@ -9,6 +9,7 @@
     "coverColor": "#ff8a3c",
     "lyricsFile": "lyrics/yes-i-do-demo.txt",
     "note": "2026年創作月份不詳",
+    "year": 2026,
     "lyricist": "Mirien",
     "composer": "Mirien",
     "status": "即將推出"
@@ -23,6 +24,7 @@
     "coverColor": "#ff8a3c",
     "lyricsFile": "lyrics/yes-i-do.txt",
     "note": "2026年創作月份不詳",
+    "year": 2026,
     "lyricist": "Mirien",
     "composer": "Mirien",
     "status": "已上架"
@@ -37,6 +39,7 @@
     "coverColor": "#ffb703",
     "lyricsFile": "lyrics/qi-shi-demo.txt",
     "note": "2026年創作月份不詳",
+    "year": 2026,
     "lyricist": "Mirien",
     "composer": "Mirien",
     "status": "即將推出"
@@ -52,6 +55,7 @@
     "coverColor": "#ffb703",
     "lyricsFile": "lyrics/qi-shi.txt",
     "note": "2026年創作月份不詳",
+    "year": 2026,
     "lyricist": "Mirien",
     "composer": "Mirien",
     "status": "已上架"
@@ -66,6 +70,7 @@
     "coverColor": "#ff6b9d",
     "lyricsFile": "lyrics/ai-de-zhen-di-demo.txt",
     "note": "2026年創作月份不詳",
+    "year": 2026,
     "lyricist": "Mirien",
     "composer": "Mirien",
     "status": "即將推出"
@@ -80,6 +85,7 @@
     "coverColor": "#ff6b9d",
     "lyricsFile": "lyrics/ai-de-zhen-di.txt",
     "note": "2026年創作月份不詳",
+    "year": 2026,
     "lyricist": "Mirien",
     "composer": "Mirien",
     "status": "已上架"
@@ -94,6 +100,7 @@
     "coverColor": "#e63946",
     "lyricsFile": "lyrics/wo-ke-mu-ni-demo.txt",
     "note": "2026年6月創作",
+    "year": 2026/6,
     "lyricist": "Mirien",
     "composer": "Mirien",
     "status": "即將推出"
@@ -108,6 +115,7 @@
     "coverColor": "#e63946",
     "lyricsFile": "lyrics/wo-ke-mu-ni.txt",
     "note": "2026年6月創作",
+    "year": 2026/6,
     "lyricist": "Mirien",
     "composer": "Mirien",
     "status": "已上架"
@@ -122,7 +130,8 @@
     "coverColor": "#ff8a3c",
     "lyricsFile": "lyrics/shi-ta-demo.txt",
     "note": "2026年創作月份不詳",
-     "lyricist": "Mirien",
+    "year": 2026,
+    "lyricist": "Mirien",
     "composer": "Mirien",
     "status": "已上架"
   },
@@ -136,7 +145,8 @@
     "coverColor": "#ff8a3c",
     "lyricsFile": "lyrics/shi-ta.txt",
     "note": "2026年創作月份不詳",
-     "lyricist": "Mirien",
+    "year": 2026,
+    "lyricist": "Mirien",
     "composer": "Mirien",
     "status": "已上架"
   },
@@ -150,6 +160,7 @@
     "coverColor": "#ff6b9d",
     "lyricsFile": "lyrics/ni-de-ai-demo.txt",
     "note": "2026年11月創作",
+    "year": 2026/11,
     "lyricist": "Mirien",
     "composer": "Mirien",
     "status": "已上架"
@@ -164,6 +175,7 @@
     "coverColor": "#ff6b9d",
     "lyricsFile": "lyrics/ni-de-ai.txt",
     "note": "2026年11月創作",
+    "year": 2026/11,
      "lyricist": "Mirien",
     "composer": "Mirien",
     "status": "已上架"
@@ -178,6 +190,7 @@
     "coverColor": "#7c5cff",
     "lyricsFile": "lyrics/jie-du-full-demo.txt",
     "note": "2026年11月創作",
+    "year": 2026/11,
      "lyricist": "朱光寶傳道、胡家厚傳道",
     "composer": "Mirien",
     "status": "即將推出"
@@ -192,6 +205,7 @@
     "coverColor": "#7c5cff",
     "lyricsFile": "lyrics/jie-du-full.txt",
     "note": "2026年11月創作",
+    "year": 2026/11,
     "lyricist": "朱光寶傳道、胡家厚傳道",
     "composer": "Mirien",
     "status": "已上架"
