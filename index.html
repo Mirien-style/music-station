@@ -145,7 +145,7 @@ if(s.lyricsFile){
   document.getElementById('lyrics').textContent = s.lyrics || '';
 } const c=document.getElementById('cover');
 c.style.background = '';
-c.style.backgroundImage = "url('images/cover.jpg')";
+c.style.backgroundImage = "url('images/cover.jpg?v=2')";
 c.textContent = ''; player.src=s.audio; renderList(); }
 document.getElementById('search').addEventListener('input',applyFilter); 
 document.getElementById('filter').addEventListener('change',applyFilter);
