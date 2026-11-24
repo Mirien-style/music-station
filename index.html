@@ -18,8 +18,10 @@ header p{color:#bbb;margin:8px 0 0}
   .wrap .card:first-child{order:2;} /* 歌單放下面 */
   .wrap .card:last-child{
   order:1;
-  position:relative;
-  z-index:1;}  /* 播放器放上面 */}
+  position:sticky;
+  top:195px;
+  z-index:10;
+  background:#1e1c22;}  /* 播放器放上面 */}
 .card{background:#1e1c22;border:1px solid #2f2b36;border-radius:18px;padding:16px}
 .controls{display:flex;gap:8px;flex-wrap:wrap;position:sticky;top:-16px;z-index:20;background:#1e1c22 !important;background-color:#1e1c22 !important;opacity:1 !important;margin:-16px -16px 12px;padding:16px;border-bottom:1px solid #2f2b36} 
 input{flex:1 1 100%;min-width:0;background:#2a2731;color:#fff;border:1px solid #3a3644;border-radius:10px;padding:10px}
@@ -68,7 +70,7 @@ code{background:#000;padding:2px 6px;border-radius:6px} .how{color:#ddd;line-hei
     box-shadow: 0 4px 12px rgba(0,0,0,0.4);
   }
   body{
-    padding-top: 148px;
+    padding-top: 195px;
   }
 }
 </style>
