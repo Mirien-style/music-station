@@ -80,7 +80,7 @@ code{background:#000;padding:2px 6px;border-radius:6px} .how{color:#ddd;line-hei
 <div class="wrap">
   <div class="card">
     <div class="controls"><input id="search" placeholder="搜尋歌名…">
-    <select id="filterStatus"><option value="全部">全部狀態</option><option>已上架</option><option>即將推出</option></select><select id="filter"><option value="全部">全部演奏模式</option><option>吉他試唱</option><option>鋼琴演奏</option></select></div>
+    <select id="filterStatus"><option value="全部">全部狀態</option><option>已上架</option><option>暫未上架</option></select><select id="filter"><option value="全部">全部演奏模式</option><option>吉他試唱</option><option>鋼琴演奏</option></select></div>
     <div id="list"></div>
   </div>
   <div class="card">
@@ -103,24 +103,25 @@ let songs=[], current=0, auto=true, filtered=[];
 const list=document.getElementById('list'), player=document.getElementById('player');
 async function load(){ const r=await fetch('songs.json'); songs=await r.json(); applyFilter(); play(0); }
 function applyFilter(){ const q=document.getElementById('search').value.trim(); const f=document.getElementById('filter').value; const fs=document.getElementById('filterStatus').value;
- filtered=songs.filter(s=>{ let ok=true; if(fs==='已上架') ok=s.status!=="即將推出"; else if(fs==='即將推出') ok=s.status==="即將推出"; if(f!=='全部') ok=ok&&s.category===f; return ok&&(!q||(s.work||s.title).includes(q)||s.version.includes(q)); }); renderList(); }
+ filtered=songs.filter(s=>{ let ok=true; if(fs==='已上架') ok=s.status!=="暫未上架"; else if(fs==='暫未上架') ok=s.status==="暫未上架"; if(f!=='全部') ok=ok&&s.category===f; return ok&&(!q||(s.work||s.title).includes(q)||s.version.includes(q)); }); renderList(); }
 function renderList(){
   list.innerHTML = filtered.map(s => {
     const idx = songs.indexOf(s);
-    const isComing = s.status === "即將推出";
+    const isComing = s.status === "暫未上架
+      ";
     return `<button class="song ${idx===current?'active':''} ${isComing?'coming':''}" onclick="play(${idx})">
       <span class="num">${idx+1}</span>
       <span style="flex:1"><b>${s.work}</b><br>
       <small style="color:#bbb">${s.version}</small></span>
-      ${isComing ? `<span class="tag coming-tag">即將推出</span>` : `<span class="tag">${s.status}</span>`}
+      ${isComing ? `<span class="tag coming-tag">暫未上架</span>` : `<span class="tag">${s.status}</span>`}
     </button>`
   }).join('');
 }
 function play(i){ if(!songs[i])return; current=i; const s=songs[i]; 
-// 如果是即將推出，就不要去抓 mp3
-  if(s.status === "即將推出"){
+// 如果是暫未上架，就不要去抓 mp3
+  if(s.status === "暫未上架"){
     document.getElementById('title').textContent = s.work + ' — ' + s.version;
-    document.getElementById('meta').textContent = s.note || '即將推出，敬請期待';
+    document.getElementById('meta').textContent = s.note || '暫未上架，敬請期待';
     document.getElementById('lyrics').textContent = '這首還在準備中，錄好後就會在這裡上架。';
     document.getElementById('credits').innerHTML = '詞：' + (s.lyricist || '—') + '<br>曲：' + (s.composer || '—');
     const c1 = document.getElementById('cover');
