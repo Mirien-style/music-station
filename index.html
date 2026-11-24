@@ -14,14 +14,19 @@ header h1{margin:0;font-size:30px;color:#fff;text-shadow:0 0 8px rgba(255,200,10
 header p{color:#bbb;margin:8px 0 0}
 .wrap{max-width:1100px;margin:auto;padding:16px 20px 40px;display:grid;grid-template-columns:340px 1fr;gap:18px}
 @media(max-width:820px){
-  .wrap{display:flex;flex-direction:column;gap:0;padding:0 12px;}
+  .wrap{display:flex;flex-direction:column;gap:0;padding:0 12px;background:#111014;}
   .wrap .card:first-child{order:2;} /* 歌單放下面 */
   .wrap .card:last-child{
   order:1;
   position:sticky;
-  top:195px;
+  top:185px;
   z-index:10;
-  background:#1e1c22;}  /* 播放器放上面 */}
+  background:#1e1c22 !important;
+  background-color:#1e1c22 !important;
+  opacity:1 !important;
+  box-shadow:0 10px 20px rgba(0,0,0,0.6);
+  border-bottom:1px solid #2f2b36;
+}  /* 播放器放上面 */}
 .card{background:#1e1c22;border:1px solid #2f2b36;border-radius:18px;padding:16px}
 .controls{display:flex;gap:8px;flex-wrap:wrap;position:sticky;top:-16px;z-index:20;background:#1e1c22 !important;background-color:#1e1c22 !important;opacity:1 !important;margin:-16px -16px 12px;padding:16px;border-bottom:1px solid #2f2b36} 
 input{flex:1 1 100%;min-width:0;background:#2a2731;color:#fff;border:1px solid #3a3644;border-radius:10px;padding:10px}
