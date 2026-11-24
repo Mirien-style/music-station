@@ -83,7 +83,7 @@ code{background:#000;padding:2px 6px;border-radius:6px} .how{color:#ddd;line-hei
     <select id="filterStatus"><option value="全部">全部狀態</option><option>已上架</option><option>暫未上架</option></select><select id="filter"><option value="全部">全部演奏模式</option><option>吉他試唱</option><option>鋼琴演奏</option></select></div>
     <div id="list"></div>
   </div>
-  <div class="card">
+  <div class="card" id="playerCard">
     <div id="cover" class="cover">♪</div>
     <h2 id="title">載入中…</h2>
     <audio id="player" controls preload="metadata"></audio>
@@ -161,6 +161,17 @@ if(window.innerWidth <= 820){
 } else {
   lyricsBtn.textContent = '收起 ▲';
 }
+const playerCard = document.getElementById('playerCard');
+function updatePlayerMode(){
+  if(window.innerWidth > 820) return;
+  if(lyricsOpen){
+    playerCard.style.position = 'relative';
+    playerCard.style.top = 'auto';
+  } else {
+    playerCard.style.position = 'sticky';
+    playerCard.style.top = '185px';
+  }
+}
 lyricsBtn.onclick = () => {
   lyricsOpen = !lyricsOpen;
   if(lyricsOpen){
@@ -170,6 +181,7 @@ lyricsBtn.onclick = () => {
     lyricsBox.classList.add('collapsed');
     lyricsBtn.textContent = '展開 ▼';
   }
+  updatePlayerMode();
 };
 load();
 </script>
