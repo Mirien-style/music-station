@@ -195,33 +195,6 @@
      "lyricist": "Mirien",
     "composer": "Mirien",
     "status": "已上架"
-  },
-  {
-    "id": "jie-du-lyrics-only-guitar",
-    "work": "戒毒的心志 僅歌詞原創版",
-    "title": "戒毒的心志 僅歌詞原創版",
-    "version": "吉他試唱",
-    "category": "吉他試唱",
-    "audio": "audio/jie-du-lyrics-only-guitar.mp3",
-    "coverColor": "#3a86ff",
-    "lyricsFile": "lyrics/jie-du-lyrics-only.txt",
-    "note": "創作年份不詳",
-    "lyricist": "Mirien",
-    "composer": "Mirien",
-    "status": "即將推出"
-  },
-  {
-    "id": "jie-du-lyrics-only-piano",
-    "work": "戒毒的心志 僅歌詞原創版",
-    "title": "戒毒的心志 僅歌詞原創版",
-    "version": "鋼琴演奏",
-    "category": "鋼琴演奏",
-    "audio": "audio/jie-du-lyrics-only-piano.mp3",
-    "coverColor": "#3a86ff",
-    "lyricsFile": "lyrics/jie-du-lyrics-only.txt",
-    "note": "創作年份不詳",
-    "lyricist": "Mirien",
-    "composer": "Mirien",
-    "status": "已上架"
   }
+  
 ]
