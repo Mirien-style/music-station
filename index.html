@@ -80,7 +80,7 @@ code{background:#000;padding:2px 6px;border-radius:6px} .how{color:#ddd;line-hei
 <div class="wrap">
   <div class="card">
     <div class="controls"><input id="search" placeholder="搜尋歌名…">
-    <select id="filterStatus"><option value="全部">全部上架狀態</option><option>已上架</option><option>即將推出</option></select><select id="filter"><option value="全部">全部演奏模式</option><option>吉他試唱</option><option>鋼琴演奏</option></select></div>
+    <select id="filterStatus"><option value="全部">全部狀態</option><option>已上架</option><option>即將推出</option></select><select id="filter"><option value="全部">全部演奏模式</option><option>吉他試唱</option><option>鋼琴演奏</option></select></div>
     <div id="list"></div>
   </div>
   <div class="card">
@@ -151,14 +151,6 @@ document.getElementById('search').addEventListener('input',applyFilter);
 document.getElementById('filter').addEventListener('change',applyFilter);
 document.getElementById('filterStatus').addEventListener('change',applyFilter); 
 document.getElementById('filter').addEventListener('change',applyFilter);
-player.addEventListener('ended',()=>{
-  if(!auto) return;
-  let next = current;
-  for(let k=0;k<songs.length;k++){
-    next = (next+1)%songs.length;
-    if(songs[next].status !== "即將推出"){ play(next); player.play().catch(()=>{}); break; }
-  }
-});
 let lyricsOpen = false;
 const lyricsBox = document.getElementById('lyrics');
 const lyricsBtn = document.getElementById('lyricsToggle');
