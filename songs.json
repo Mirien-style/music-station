@@ -1,5 +1,20 @@
 [
   {
+    "id": "yes-i-do-piano",
+    "work": "Yes, I Do.",
+    "title": "Yes, I Do.",
+    "version": "鋼琴演奏",
+    "category": "鋼琴演奏",
+    "audio": "audio/yes-i-do-piano.mp3",
+    "coverColor": "#ff8a3c",
+    "lyricsFile": "lyrics/yes-i-do.txt",
+    "note": "2026年創作月份不詳",
+    "year": 2026,
+    "lyricist": "Mirien",
+    "composer": "Mirien",
+    "status": "已上架"
+  },
+  {
     "id": "yes-i-do-guitar",
     "work": "Yes, I Do.",
     "title": "Yes, I Do.",
@@ -14,15 +29,16 @@
     "composer": "Mirien",
     "status": "即將推出"
   },
+
   {
-    "id": "yes-i-do-piano",
-    "work": "Yes, I Do.",
-    "title": "Yes, I Do.",
+    "id": "qi-shi-piano",
+    "work": "啟示",
+    "title": "啟示",
     "version": "鋼琴演奏",
     "category": "鋼琴演奏",
-    "audio": "audio/yes-i-do-piano.mp3",
-    "coverColor": "#ff8a3c",
-    "lyricsFile": "lyrics/yes-i-do.txt",
+    "audio": "audio/qi-shi-piano.mp3",
+    "coverColor": "#ffb703",
+    "lyricsFile": "lyrics/qi-shi.txt",
     "note": "2026年創作月份不詳",
     "year": 2026,
     "lyricist": "Mirien",
@@ -45,15 +61,16 @@
     "status": "即將推出"
     
   },
-  {
-    "id": "qi-shi-piano",
-    "work": "啟示",
-    "title": "啟示",
+
+   {
+    "id": "ai-de-zhen-di-piano",
+    "work": "愛的真諦",
+    "title": "愛的真諦",
     "version": "鋼琴演奏",
     "category": "鋼琴演奏",
-    "audio": "audio/qi-shi-piano.mp3",
-    "coverColor": "#ffb703",
-    "lyricsFile": "lyrics/qi-shi.txt",
+    "audio": "audio/ai-de-zhen-di-piano.mp3",
+    "coverColor": "#ff6b9d",
+    "lyricsFile": "lyrics/ai-de-zhen-di.txt",
     "note": "2026年創作月份不詳",
     "year": 2026,
     "lyricist": "Mirien",
@@ -75,17 +92,18 @@
     "composer": "Mirien",
     "status": "即將推出"
   },
+
   {
-    "id": "ai-de-zhen-di-piano",
-    "work": "愛的真諦",
-    "title": "愛的真諦",
+    "id": "wo-ke-mu-ni-piano",
+    "work": "我渴慕祢",
+    "title": "我渴慕祢",
     "version": "鋼琴演奏",
     "category": "鋼琴演奏",
-    "audio": "audio/ai-de-zhen-di-piano.mp3",
-    "coverColor": "#ff6b9d",
-    "lyricsFile": "lyrics/ai-de-zhen-di.txt",
-    "note": "2026年創作月份不詳",
-    "year": 2026,
+    "audio": "audio/wo-ke-mu-ni-piano.mp3",
+    "coverColor": "#e63946",
+    "lyricsFile": "lyrics/wo-ke-mu-ni.txt",
+    "note": "2026年6月創作",
+    "year": "2026/6",
     "lyricist": "Mirien",
     "composer": "Mirien",
     "status": "已上架"
@@ -105,17 +123,18 @@
     "composer": "Mirien",
     "status": "即將推出"
   },
-  {
-    "id": "wo-ke-mu-ni-piano",
-    "work": "我渴慕祢",
-    "title": "我渴慕祢",
+
+   {
+    "id": "shi-ta-piano",
+    "work": "是祂",
+    "title": "是祂",
     "version": "鋼琴演奏",
     "category": "鋼琴演奏",
-    "audio": "audio/wo-ke-mu-ni-piano.mp3",
-    "coverColor": "#e63946",
-    "lyricsFile": "lyrics/wo-ke-mu-ni.txt",
-    "note": "2026年6月創作",
-    "year": "2026/6",
+    "audio": "audio/shi-ta-piano.mp3",
+    "coverColor": "#ff8a3c",
+    "lyricsFile": "lyrics/shi-ta.txt",
+    "note": "2026年創作月份不詳",
+    "year": 2026,
     "lyricist": "Mirien",
     "composer": "Mirien",
     "status": "已上架"
@@ -135,18 +154,19 @@
     "composer": "Mirien",
     "status": "已上架"
   },
+
   {
-    "id": "shi-ta-piano",
-    "work": "是祂",
-    "title": "是祂",
+    "id": "ni-de-ai-piano",
+    "work": "祢的愛",
+    "title": "祢的愛",
     "version": "鋼琴演奏",
     "category": "鋼琴演奏",
-    "audio": "audio/shi-ta-piano.mp3",
-    "coverColor": "#ff8a3c",
-    "lyricsFile": "lyrics/shi-ta.txt",
-    "note": "2026年創作月份不詳",
-    "year": 2026,
-    "lyricist": "Mirien",
+    "audio": "audio/ni-de-ai-piano.mp3",
+    "coverColor": "#ff6b9d",
+    "lyricsFile": "lyrics/ni-de-ai.txt",
+    "note": "2026年11月創作",
+    "year": "2026/11",
+     "lyricist": "Mirien",
     "composer": "Mirien",
     "status": "已上架"
   },
@@ -165,21 +185,22 @@
     "composer": "Mirien",
     "status": "已上架"
   },
-  {
-    "id": "ni-de-ai-piano",
-    "work": "祢的愛",
-    "title": "祢的愛",
+
+   {
+    "id": "jie-du-full-piano",
+    "work": "戒毒的心志 全原創版",
+    "title": "戒毒的心志 全原創版",
     "version": "鋼琴演奏",
     "category": "鋼琴演奏",
-    "audio": "audio/ni-de-ai-piano.mp3",
-    "coverColor": "#ff6b9d",
-    "lyricsFile": "lyrics/ni-de-ai.txt",
+    "audio": "audio/jie-du-full-piano.mp3",
+    "coverColor": "#7c5cff",
+    "lyricsFile": "lyrics/jie-du-full.txt",
     "note": "2026年11月創作",
     "year": "2026/11",
-     "lyricist": "Mirien",
+    "lyricist": "朱光寶傳道、胡家厚傳道",
     "composer": "Mirien",
     "status": "已上架"
-  },
+   },
   {
     "id": "jie-du-full-guitar",
     "work": "戒毒的心志 全原創版",
@@ -194,21 +215,7 @@
      "lyricist": "朱光寶傳道、胡家厚傳道",
     "composer": "Mirien",
     "status": "即將推出"
-  },
-  {
-    "id": "jie-du-full-piano",
-    "work": "戒毒的心志 全原創版",
-    "title": "戒毒的心志 全原創版",
-    "version": "鋼琴演奏",
-    "category": "鋼琴演奏",
-    "audio": "audio/jie-du-full-piano.mp3",
-    "coverColor": "#7c5cff",
-    "lyricsFile": "lyrics/jie-du-full.txt",
-    "note": "2026年11月創作",
-    "year": "2026/11",
-    "lyricist": "朱光寶傳道、胡家厚傳道",
-    "composer": "Mirien",
-    "status": "已上架"
   }
+ 
   
 ]
