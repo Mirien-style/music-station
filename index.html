@@ -124,7 +124,7 @@ function renderList(){
 function play(i){ if(!songs[i])return; current=i; const s=songs[i]; 
 // 如果是暫未上架，就不要去抓 mp3
   if(s.status === "即將推出"){
-    document.getElementById('title').textContent = s.work + ' — ' + s.version;
+    document.getElementById('title').innerHTML = s.work + '<span style="color:#bbb; font-size:20px;">(' + s.version + ')</span>';
     document.getElementById('meta').textContent = s.note || '暫未上架，敬請期待';
     document.getElementById('lyrics').textContent = '這首還在準備中，錄好後就會在這裡上架。';
     document.getElementById('credits').innerHTML = '詞：' + (s.lyricist || '—') + '<br>曲：' + (s.composer || '—');
@@ -138,7 +138,7 @@ function play(i){ if(!songs[i])return; current=i; const s=songs[i];
     return;
   }
 
-document.getElementById('title').textContent=(s.work||s.title)+' — '+s.version; 
+document.getElementById('title').innerHTML=(s.work||s.title)+'<span style="color:#bbb; font-size:20px;">('+s.version+')</span>';  
 document.getElementById('meta').textContent = s.note || ''; // 先清空，等等去抓 txt
 document.getElementById('credits').innerHTML = '詞：' + (s.lyricist || '—') + '<br>曲：' + (s.composer || '—');
 document.getElementById('lyrics').textContent = '載入中...';
