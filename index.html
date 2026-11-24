@@ -151,9 +151,6 @@ document.getElementById('search').addEventListener('input',applyFilter);
 document.getElementById('filter').addEventListener('change',applyFilter);
 document.getElementById('filterStatus').addEventListener('change',applyFilter); 
 document.getElementById('filter').addEventListener('change',applyFilter);
-document.getElementById('prev').onclick=()=>play((current-1+songs.length)%songs.length);
-document.getElementById('next').onclick=()=>play((current+1)%songs.length);
-document.getElementById('autoBtn').onclick=(e)=>{auto=!auto; e.target.textContent='連續播放：'+(auto?'開':'關')};
 player.addEventListener('ended',()=>{
   if(!auto) return;
   let next = current;
