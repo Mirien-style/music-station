@@ -3,13 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mirien的原創詩歌小站</title>
+<title>Mirien｜原創詩歌</title>
 <style>
 .song.coming{ opacity: 0.55; }
 .coming-tag{ background: #555 !important; color: #fff !important; }
   
 *{box-sizing:border-box} body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Microsoft JhengHei",sans-serif;background:#111014;color:#fff}
-header{position:fixed;top:0;left:0;right:0;z-index:101;background:#111014;text-align:center;padding:16px 20px 10px;max-width:1100px;margin:auto;border-bottom:1px solid #2f2b36} header h1{margin:0;font-size:30px} header p{color:#bbb;margin:8px 0 0}
+header{position:fixed;top:0;left:0;right:0;z-index:101;background:#111014;text-align:center;padding:16px 20px 10px;max-width:1100px;margin:auto;border-bottom:1px solid #2f2b36} 
+header h1{margin:0;font-size:30px;color:#fff;text-shadow:0 0 8px rgba(255,200,100,0.9),0 0 18px rgba(255,160,60,0.7),0 0 32px rgba(255,140,40,0.5)} 
+header p{color:#bbb;margin:8px 0 0}
 .wrap{max-width:1100px;margin:auto;padding:16px 20px 40px;display:grid;grid-template-columns:340px 1fr;gap:18px}
 @media(max-width:820px){
   .wrap{display:flex;flex-direction:column;}
@@ -74,7 +76,7 @@ code{background:#000;padding:2px 6px;border-radius:6px} .how{color:#ddd;line-hei
 </style>
 </head>
 <body>
-<header><h1>✞ Mirien的原創詩歌小站</h1><p></p></header>
+<header><h1>✞Mirien｜原創詩歌</h1><p></p></header>
 <div class="wrap">
   <div class="card">
     <div class="controls"><input id="search" placeholder="搜尋歌名…">
@@ -85,7 +87,6 @@ code{background:#000;padding:2px 6px;border-radius:6px} .how{color:#ddd;line-hei
     <div id="cover" class="cover">♪</div>
     <h2 id="title">載入中…</h2>
     <audio id="player" controls preload="metadata"></audio>
-    <div class="btns"><button id="prev">⏮ 上一首</button><button id="next">下一首 ⏭</button><button class="ghost" id="autoBtn">連續播放：開</button></div>
     <p class="sub" id="meta" style="margin-top:16px;"></p>
     <p class="sub" id="credits" style="font-size:14px; color:#bbb;"></p>
     <!-- <p id="note" style="color:#bbb"></p> -->
