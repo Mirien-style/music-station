@@ -159,13 +159,9 @@ document.getElementById('filter').addEventListener('change',applyFilter);
 let lyricsOpen = false;
 const lyricsBox = document.getElementById('lyrics');
 const lyricsBtn = document.getElementById('lyricsToggle');
-// 手機版一開始先收起來，電腦版一開始打開
-if(window.innerWidth <= 820){
-  lyricsBox.classList.add('collapsed');
-  lyricsBtn.textContent = '展開 ▼';
-} else {
-  lyricsBtn.textContent = '收起 ▲';
-}
+// 不管手機電腦，一開始都收起來
+lyricsBox.classList.add('collapsed');
+lyricsBtn.textContent = '展開 ▼';
 const playerCard = document.getElementById('playerCard');
 function updatePlayerMode(){
   if(window.innerWidth > 820) return;
