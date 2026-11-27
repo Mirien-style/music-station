@@ -182,6 +182,7 @@ const playerCard = document.getElementById('playerCard');
 function updatePlayerMode(){
   if(window.innerWidth > 820) return;
   const listCard = document.querySelector('.wrap .card:first-child');
+  const controls = document.querySelector('.controls');
   if(lyricsOpen){
     playerCard.style.position = 'relative';
     playerCard.style.top = 'auto';
@@ -191,7 +192,9 @@ function updatePlayerMode(){
     if(listCard) listCard.style.marginTop = '0';
   } else {
     playerCard.style.position = 'fixed';
-    playerCard.style.top = '200px';
+    // 讓播放器自己去量搜尋下面在哪裡，量到多少就貼到多少
+    const bottom = controls ? controls.getBoundingClientRect().bottom : 200;
+    playerCard.style.top = bottom + 'px';
     playerCard.style.left = '12px';
     playerCard.style.right = '12px';
     playerCard.style.zIndex = '101';
@@ -209,6 +212,9 @@ lyricsBtn.onclick = () => {
   }
   updatePlayerMode();
 };
+window.addEventListener('resize', updatePlayerMode);
+window.addEventListener('load', updatePlayerMode);
+load();
 load();
 </script>
 </body></html>
