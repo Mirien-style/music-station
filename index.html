@@ -181,12 +181,19 @@ lyricsBtn.textContent = '展開 ▼';
 const playerCard = document.getElementById('playerCard');
 function updatePlayerMode(){
   if(window.innerWidth > 820) return;
+  const listCard = document.querySelector('.wrap .card:first-child');
   if(lyricsOpen){
     playerCard.style.position = 'relative';
     playerCard.style.top = 'auto';
+    playerCard.style.left = 'auto';
+    playerCard.style.right = 'auto';
+    if(listCard) listCard.style.marginTop = '0';
   } else {
     playerCard.style.position = 'fixed';
     playerCard.style.top = '198px';
+    playerCard.style.left = '12px';
+    playerCard.style.right = '12px';
+    if(listCard) listCard.style.marginTop = '380px';
   }
 }
 lyricsBtn.onclick = () => {
