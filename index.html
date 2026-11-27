@@ -107,6 +107,13 @@ code{background:#000;padding:2px 6px;border-radius:6px} .how{color:#ddd;line-hei
 
 <script>
 let songs=[], current=0, auto=true, filtered=[];
+// 每個模式的開關，hide = 暫時隱藏，show = 顯示
+// 想藏哪個就把那一行改成 "hide"，想顯示就改回 "show"
+const MODE_SETTINGS = {
+  "鋼琴演示": "show",
+  "吉他彈唱": "hide",
+  "官方正式": "hide"
+};
 const list=document.getElementById('list'), player=document.getElementById('player');
 async function load(){ const r=await fetch('songs.json'); songs=await r.json(); applyFilter(); play(0); }
 function applyFilter(){ const q=document.getElementById('search').value.trim(); const f=document.getElementById('filter').value; const fs=document.getElementById('filterStatus').value;
