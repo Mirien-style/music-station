@@ -115,9 +115,10 @@ const MODE_SETTINGS = {
   "官方正式": "hide"
 };
 const list=document.getElementById('list'), player=document.getElementById('player');
-async function load(){ const r=await fetch('songs.json'); songs=await r.json(); applyFilter(); play(0); }
+function syncModeOptions(){ const sel=document.getElementById('filter'); [...sel.options].forEach(o=>{ if(o.value==="全部") return; o.hidden = (MODE_SETTINGS[o.text]==="hide"); }); if(MODE_SETTINGS[sel.value]==="hide") sel.value="全部"; }
+async function load(){ const r=await fetch('songs.json'); songs=await r.json(); syncModeOptions(); applyFilter(); play(0); }
 function applyFilter(){ const q=document.getElementById('search').value.trim(); const f=document.getElementById('filter').value; const fs=document.getElementById('filterStatus').value;
- filtered=songs.filter(s=>{ let ok=true; if(fs==='已上架') ok=s.status!=="未上架"; else if(fs==='未上架') ok=s.status==="未上架"; if(f!=='全部') ok=ok&&s.category===f; return ok&&(!q||(s.work||s.title).includes(q)||s.version.includes(q)); }); renderList(); }
+  filtered=songs.filter(s=>{ if(MODE_SETTINGS[s.category]==="hide") return false; let ok=true; if(fs==='已上架') ok=s.status!=="未上架"; else if(fs==='未上架') ok=s.status==="未上架"; if(f!=='全部') ok=ok&&s.category===f; return ok&&(!q||(s.work||s.title).includes(q)||s.version.includes(q)); }); renderList(); }
 function renderList(){
   list.innerHTML = filtered.map(s => {
     const idx = songs.indexOf(s);
