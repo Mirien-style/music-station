@@ -120,11 +120,11 @@ async function load(){ const r=await fetch('songs.json'); songs=await r.json(); 
 function applyFilter(){ const q=document.getElementById('search').value.trim(); const f=document.getElementById('filter').value; const fs=document.getElementById('filterStatus').value;
   filtered=songs.filter(s=>{ if(MODE_SETTINGS[s.category]==="hide") return false; let ok=true; if(fs==='已上架') ok=s.status!=="未上架"; else if(fs==='未上架') ok=s.status==="未上架"; if(f!=='全部') ok=ok&&s.category===f; return ok&&(!q||(s.work||s.title).includes(q)||s.version.includes(q)); }); renderList(); }
 function renderList(){
-  list.innerHTML = filtered.map(s => {
+    list.innerHTML = filtered.map((s, displayIdx) => {
     const idx = songs.indexOf(s);
     const isComing = s.status === "未上架";
     return `<button class="song ${idx===current?'active':''} ${isComing?'coming':''}" onclick="play(${idx})">
-      <span class="num">${idx+1}</span>
+      <span class="num">${displayIdx+1}</span>
       <span style="flex:1"><b>${s.work}</b><br>
       <small style="color:#bbb">${s.version}</small></span>
       ${isComing ? `<span class="tag coming-tag">未上架</span>` : `<span class="tag">${s.status}</span>`}
