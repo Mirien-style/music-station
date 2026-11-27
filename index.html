@@ -19,13 +19,14 @@ header p{color:#bbb;margin:8px 0 0}
   .wrap .card:last-child{
   order:1;
   position:sticky;
-  top:204px;
+  top:202px;
   z-index:10;
   background:#1e1c22 !important;
   background-color:#1e1c22 !important;
   opacity:1 !important;
   box-shadow:0 10px 20px rgba(0,0,0,0.6);
   border-bottom:1px solid #2f2b36;
+  border-top:2px solid #1e1c22;
   padding-bottom:16px;
   margin-bottom:0;
 }  /* 播放器放上面 */}
@@ -77,7 +78,7 @@ code{background:#000;padding:2px 6px;border-radius:6px} .how{color:#ddd;line-hei
     box-shadow: 0 4px 12px rgba(0,0,0,0.4);
   }
   body{
-    padding-top: 204px;
+    padding-top: 202px;
   }
 }
 </style>
@@ -87,7 +88,7 @@ code{background:#000;padding:2px 6px;border-radius:6px} .how{color:#ddd;line-hei
 <div class="wrap">
   <div class="card">
     <div class="controls"><input id="search" placeholder="搜尋歌名…">
-    <select id="filter"><option value="全部">全部模式</option><option>鋼琴演示</option><option>吉他彈唱</option></select><select id="filterStatus"><option value="全部">全部狀態</option><option>已上架</option><option>未上架</option><option>官方正式</option></select></div>
+    <select id="filter"><option value="全部">全部模式</option><option>鋼琴演示</option><option>吉他彈唱</option><option>官方正式</option></select><select id="filterStatus"><option value="全部">全部狀態</option><option>已上架</option><option>未上架</option></select>
     <div id="list"></div>
   </div>
   <div class="card" id="playerCard">
@@ -180,7 +181,7 @@ function updatePlayerMode(){
     playerCard.style.top = 'auto';
   } else {
     playerCard.style.position = 'sticky';
-    playerCard.style.top = '204px';
+    playerCard.style.top = '202px';
   }
 }
 lyricsBtn.onclick = () => {
