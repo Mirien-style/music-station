@@ -34,6 +34,8 @@ select{flex:1 1 0;min-width:0;background:#1E1E22;color:#F2F2F2;border:1px solid 
   .cover{height:150px !important; border-radius:0; margin:-0px -16px 0 -16px;}
 }
 h2{margin:14px 0 4px;font-size:26px;display:flex;justify-content:space-between;align-items:baseline;gap:12px;color:#FFFFFF} .sub{color:#A8A8A8;margin:0 0 14px}
+/* 創作年份那行拿掉 */
+#meta{display:none !important;margin:0 !important;padding:0 !important;height:0 !important;overflow:hidden;}
 /* 播放器歌名：置中、上下兩排 */
 #playerCard h2#title{
   display:flex !important;
@@ -47,8 +49,8 @@ h2{margin:14px 0 4px;font-size:26px;display:flex;justify-content:space-between;a
 }
 #title .t-work{display:block !important;width:100%;text-align:center !important;font-size:26px;font-weight:800;color:#FFFFFF;}
 #title .t-ver{display:block !important;width:100%;text-align:center !important;font-size:16px;font-weight:500;color:#A8A8A8;}
-/* 按鈕裡面兩行：上行大字深色，下行小字淡色 */
-.open-lyrics-wrap{text-align:center !important;margin:14px 0 6px;}
+/* 按鈕往上挪一點，電腦手機都一樣 */
+.open-lyrics-wrap{text-align:center !important;margin:6px 0 6px;}
 #openLyricsBtn{
   display:inline-flex !important;
   flex-direction:column !important;
@@ -74,7 +76,7 @@ h2{margin:14px 0 4px;font-size:26px;display:flex;justify-content:space-between;a
 .lyrics-modal-title{margin:0 24px 6px 0;font-size:20px;font-weight:800;color:#333333;text-align:center;}
 .lyrics-modal-sub{margin:0 0 16px;font-size:14px;color:#666666;text-align:center;}
 .lyrics-modal-text{white-space:pre-wrap;line-height:2;font-size:15px;color:#333333;margin:0;}
-audio{width:100%;margin:12px 0 10px} .btns{display:flex;gap:8px} button{cursor:pointer;background:#F2DFA0;border:0;color:#2A2410;font-weight:700;padding:11px 14px;border-radius:10px}
+audio{width:100%;margin:12px 0 4px} .btns{display:flex;gap:8px} button{cursor:pointer;background:#F2DFA0;border:0;color:#2A2410;font-weight:700;padding:11px 14px;border-radius:10px}
 button.ghost{background:#3A3A40;color:#F2DFA0} 
 code{background:#333333;color:#F2DFA0;padding:2px 6px;border-radius:6px} .how{color:#D0D0D0;line-height:1.9} .how li{margin:6px 0}
 @media(min-width:821px){
