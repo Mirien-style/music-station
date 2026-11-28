@@ -56,7 +56,7 @@ h2{margin:14px 0 4px;font-size:26px;display:flex;justify-content:space-between;a
   justify-content:center !important;
   text-align:center !important;
   gap:3px;
-  background:#F2DFA0;color:#2A2410;font-weight:800;padding:12px 28px;border-radius:16px;text-decoration:none;
+  background:#F2DFA0;color:#2A2410;font-weight:800;padding:12px 28px;border-radius:16px;border:0;cursor:pointer;text-decoration:none;
 }
 #openLyricsBtn .btn-main{font-size:15px;font-weight:800;line-height:1.3;}
 #openLyricsBtn .btn-sub{font-size:13px;font-weight:500;opacity:0.75;line-height:1.3;}
@@ -65,6 +65,15 @@ h2{margin:14px 0 4px;font-size:26px;display:flex;justify-content:space-between;a
 /* 電腦版 🖱 單獨壓暗一點，手機版 👇 不動 */
 #openLyricsBtn .mouse-emoji{display:inline-block;filter:brightness(0.55) saturate(1.2) contrast(1.1);}
 #playerCard .sub#meta{text-align:center !important;}
+/* 歌詞浮窗：不會佔滿整個螢幕，白底、深灰字 */
+.lyrics-modal{position:fixed;inset:0;z-index:300;display:flex;align-items:center;justify-content:center;padding:20px;}
+.lyrics-modal.hidden{display:none;}
+.lyrics-modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,0.55);}
+.lyrics-modal-card{position:relative;background:#FFFFFF;color:#333333;width:100%;max-width:560px;max-height:78vh;overflow-y:auto;border-radius:16px;padding:30px 24px 24px;box-shadow:0 12px 40px rgba(0,0,0,0.35);}
+.lyrics-modal-close{position:absolute;top:10px;right:12px;background:transparent;border:0;font-size:22px;line-height:1;color:#333333;cursor:pointer;padding:6px 8px;}
+.lyrics-modal-title{margin:0 24px 6px 0;font-size:20px;font-weight:800;color:#333333;text-align:center;}
+.lyrics-modal-sub{margin:0 0 16px;font-size:14px;color:#666666;text-align:center;}
+.lyrics-modal-text{white-space:pre-wrap;line-height:2;font-size:15px;color:#333333;margin:0;}
 audio{width:100%;margin:12px 0 10px} .btns{display:flex;gap:8px} button{cursor:pointer;background:#F2DFA0;border:0;color:#2A2410;font-weight:700;padding:11px 14px;border-radius:10px}
 button.ghost{background:#3A3A40;color:#F2DFA0} 
 code{background:#333333;color:#F2DFA0;padding:2px 6px;border-radius:6px} .how{color:#D0D0D0;line-height:1.9} .how li{margin:6px 0}
@@ -80,6 +89,8 @@ code{background:#333333;color:#F2DFA0;padding:2px 6px;border-radius:6px} .how{co
   /* 手機版按鈕文字換成 👇 */
   #openLyricsBtn .txt-desktop{display:none;}
   #openLyricsBtn .txt-mobile{display:inline;}
+  .lyrics-modal{padding:16px;}
+  .lyrics-modal-card{max-height:80vh;padding:28px 18px 20px;}
 }
 </style>
 </head>
@@ -98,34 +109,68 @@ code{background:#333333;color:#F2DFA0;padding:2px 6px;border-radius:6px} .how{co
     <p class="sub" id="meta" style="margin:8px 0 0;"></p>
     <p class="sub" id="credits" style="font-size:14px; color:#A8A8A8; margin:0; line-height:1.3; display:none;"></p>
     <div class="open-lyrics-wrap">
-      <a id="openLyricsBtn" href="#" target="_blank" rel="noopener">
+      <button id="openLyricsBtn" type="button">
         <span class="btn-main">歌詞/歌曲說明</span>
         <span class="btn-sub"><span class="txt-desktop">點我開啟<span class="mouse-emoji">🖱</span></span><span class="txt-mobile">點我開啟👇</span></span>
-      </a>
+      </button>
     </div>
+  </div>
+</div>
+<!-- 歌詞浮窗 -->
+<div id="lyricsModal" class="lyrics-modal hidden">
+  <div class="lyrics-modal-backdrop" id="lyricsBackdrop"></div>
+  <div class="lyrics-modal-card">
+    <button id="closeLyricsModal" class="lyrics-modal-close" type="button" aria-label="關閉">✕</button>
+    <h3 class="lyrics-modal-title" id="lyricsModalTitle">歌詞 / 歌曲說明</h3>
+    <p class="lyrics-modal-sub" id="lyricsModalSub"></p>
+    <p class="lyrics-modal-text" id="lyricsModalText">載入中...</p>
   </div>
 </div>
 <script>
 let songs=[], current=0, auto=true, filtered=[];
-let currentLyricsUrl = '';
+let currentSong = null;
 const MODE_SETTINGS = {"鋼琴演示":"show","吉他彈唱":"show","官方正式":"hide"};
 const list=document.getElementById('list'), player=document.getElementById('player');
 const openLyricsBtn = document.getElementById('openLyricsBtn');
-function setLyricsButton(url){
-  currentLyricsUrl = url || '';
-  if(currentLyricsUrl){
-    openLyricsBtn.href = currentLyricsUrl;
-    openLyricsBtn.target = '_blank';
-    openLyricsBtn.classList.remove('disabled');
-  } else {
-    openLyricsBtn.href = '#';
-    openLyricsBtn.removeAttribute('target');
-    openLyricsBtn.classList.add('disabled');
+const lyricsModal = document.getElementById('lyricsModal');
+const lyricsModalTitle = document.getElementById('lyricsModalTitle');
+const lyricsModalSub = document.getElementById('lyricsModalSub');
+const lyricsModalText = document.getElementById('lyricsModalText');
+function closeLyricsModal(){
+  lyricsModal.classList.add('hidden');
+  document.body.style.overflow = '';
+}
+document.getElementById('closeLyricsModal').addEventListener('click', closeLyricsModal);
+document.getElementById('lyricsBackdrop').addEventListener('click', closeLyricsModal);
+document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeLyricsModal(); });
+async function openLyricsModal(){
+  if(!currentSong){ alert('請先選一首歌'); return; }
+  if(currentSong.status === "未上架"){
+    lyricsModalTitle.textContent = currentSong.work || '歌詞 / 歌曲說明';
+    lyricsModalSub.textContent = currentSong.version ? '(' + currentSong.version + ')' : '';
+    lyricsModalText.textContent = '這首還在準備中，錄好後就會在這裡上架。';
+    lyricsModal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+    return;
+  }
+  lyricsModalTitle.textContent = currentSong.work || currentSong.title || '歌詞 / 歌曲說明';
+  lyricsModalSub.textContent = currentSong.version ? '(' + currentSong.version + ')' : '';
+  lyricsModalText.textContent = '載入中...';
+  lyricsModal.classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+  try{
+    if(currentSong.lyricsFile){
+      const r = await fetch(currentSong.lyricsFile);
+      if(!r.ok) throw new Error('lyrics file ' + r.status);
+      lyricsModalText.textContent = await r.text();
+    } else {
+      lyricsModalText.textContent = currentSong.lyrics || '這首還沒有歌詞檔';
+    }
+  }catch(e){
+    lyricsModalText.textContent = currentSong.lyrics || '歌詞載入失敗，請確認 lyricsFile 路徑是否正確。';
   }
 }
-openLyricsBtn.addEventListener('click', (e)=>{
-  if(!currentLyricsUrl){ e.preventDefault(); alert('這首還沒有歌詞檔'); }
-});
+openLyricsBtn.addEventListener('click', openLyricsModal);
 function syncModeOptions(){ const sel=document.getElementById('filter'); [...sel.options].forEach(o=>{ if(o.value==="全部") return; o.hidden = (MODE_SETTINGS[o.text]==="hide"); }); if(MODE_SETTINGS[sel.value]==="hide") sel.value="全部"; }
 async function load(){
   try{
@@ -138,7 +183,6 @@ async function load(){
     console.error(e);
     list.innerHTML = '<p style="padding:12px;line-height:1.8;color:#FFB0B0">載入失敗：找不到 songs.json<br>請確認 songs.json 跟 index.html 在同一個資料夾。</p>';
     document.getElementById('title').innerHTML = '<span class="t-work">載入失敗</span><span class="t-ver"></span>';
-    setLyricsButton('');
   }
 }
 function applyFilter(){ const q=document.getElementById('search').value.trim(); const f=document.getElementById('filter').value; const fs=document.getElementById('filterStatus').value;
@@ -155,8 +199,7 @@ function renderList(){
     </button>`
   }).join('');
 }
-function play(i){ if(!songs[i])return; current=i; const s=songs[i]; 
-  setLyricsButton(s.lyricsFile || '');
+function play(i){ if(!songs[i])return; current=i; const s=songs[i]; currentSong = s;
   if(s.status === "未上架"){
     document.getElementById('title').innerHTML = '<span class="t-work">' + s.work + '</span><span class="t-ver">(' + s.version + ')</span>';
     document.getElementById('meta').textContent = s.year ? '創作年份．' + s.year : '未上架，敬請期待';
