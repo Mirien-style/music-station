@@ -430,7 +430,8 @@ function updatePlayerMode(){
   if(listCardEl) listCardEl.style.marginTop = '0px';
   const bottom = controls ? controls.getBoundingClientRect().bottom : 184;
   playerCard.style.position = 'fixed';
-  playerCard.style.top = (bottom + 24) + 'px';
+  /* 手機版播放卡：往下移 29px，讓按鈕下方線到卡片上方線 = 按鈕上方線到 Demo Ver. */
+  playerCard.style.top = (bottom + 29) + 'px';
   playerCard.style.left = '12px';
   playerCard.style.right = '12px';
   playerCard.style.zIndex = '101';
