@@ -117,7 +117,8 @@ code{background:#333333;color:#F2DFA0;padding:2px 6px;border-radius:6px} .how{co
   /* 手機版：只藏歌單列表 #list，不藏整張卡片，不然搜尋欄會跟著不見 */
   #listCard{background:transparent !important;border:none !important;box-shadow:none !important;padding:0 !important;}
   #list{display:none !important;}
-  body.playlist-open #list{display:block !important;position:fixed !important;left:12px !important;right:12px !important;z-index:102 !important;max-height:42vh !important;overflow-y:auto !important;background:#26262B !important;border:1px solid #3A3A3E !important;border-radius:0 0 14px 14px !important;padding:12px !important;box-shadow:0 12px 30px rgba(0,0,0,0.45) !important;}
+  /* 手機版展開歌單：從按鈕下面直接往下長，蓋住整個播放區 */
+  body.playlist-open #list{display:block !important;position:fixed !important;left:12px !important;right:12px !important;z-index:102 !important;overflow-y:auto !important;background:#26262B !important;border:1px solid #3A3A3E !important;border-radius:0 0 14px 14px !important;padding:12px !important;box-shadow:0 12px 30px rgba(0,0,0,0.45) !important;}
   /* 手機版播放清單按鈕：卡在搜尋區與播放區的界線上，上半部在黃色區、下半部在播放區 */
   #playlistToggle{display:inline-flex !important;position:absolute !important;left:50% !important;bottom:0 !important;transform:translate(-50%,50%) !important;z-index:103 !important;align-items:center !important;justify-content:center !important;background:#26262B !important;color:#F2DFA0 !important;border:1px solid #D9C47E !important;border-radius:99px !important;padding:6px 14px !important;font-size:13px !important;font-weight:700 !important;white-space:nowrap !important;box-shadow:0 4px 12px rgba(0,0,0,0.35) !important;}
   /* 手機版播放區：四個角改圓角 */
@@ -178,11 +179,15 @@ const list=document.getElementById('list'), player=document.getElementById('play
 const playlistToggle = document.getElementById('playlistToggle');
 const listEl = document.getElementById('list');
 function updatePlaylistPanel(){
-  if(window.innerWidth > 820){ document.body.classList.remove('playlist-open'); if(listEl){ listEl.style.top=''; } return; }
+  if(window.innerWidth > 820){ document.body.classList.remove('playlist-open'); if(listEl){ listEl.style.top=''; listEl.style.height=''; listEl.style.maxHeight=''; } return; }
   if(!playlistOpen){ document.body.classList.remove('playlist-open'); return; }
   document.body.classList.add('playlist-open');
-  const playerBottom = document.getElementById('playerCard').getBoundingClientRect().bottom;
-  listEl.style.top = (playerBottom + 8) + 'px';
+  /* 歌單從按鈕下面直接往下長：上面接在按鈕底部，下面一路蓋到螢幕底部，把播放區整張蓋住 */
+  const btnBottom = playlistToggle.getBoundingClientRect().bottom;
+  const top = btnBottom;
+  listEl.style.top = top + 'px';
+  listEl.style.height = (window.innerHeight - top - 12) + 'px';
+  listEl.style.maxHeight = (window.innerHeight - top - 12) + 'px';
 }
 function togglePlaylist(){
   if(window.innerWidth > 820) return;
