@@ -73,8 +73,9 @@ h2{margin:14px 0 4px;font-size:26px;display:flex;justify-content:space-between;a
 .lyrics-modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,0.55);}
 .lyrics-modal-card{position:relative;background:#FFFFFF;color:#333333;width:100%;max-width:560px;max-height:78vh;overflow-y:auto;border-radius:16px;padding:30px 24px 24px;box-shadow:0 12px 40px rgba(0,0,0,0.35);}
 .lyrics-modal-close{position:absolute;top:10px;right:12px;background:transparent;border:0;font-size:22px;line-height:1;color:#333333;cursor:pointer;padding:6px 8px;}
-.lyrics-modal-title{margin:0 24px 6px 0;font-size:20px;font-weight:800;color:#333333;text-align:center;}
-.lyrics-modal-sub{margin:0 0 16px;font-size:14px;color:#666666;text-align:center;}
+.lyrics-modal-title{margin:0 24px 16px 0;font-size:20px;font-weight:800;color:#333333;text-align:center !important;}
+/* 浮窗裡的模式那行 (鋼琴演示) 不要顯示 */
+.lyrics-modal-sub{display:none !important;margin:0 !important;padding:0 !important;height:0 !important;overflow:hidden;}
 .lyrics-modal-text{white-space:pre-wrap;line-height:2;font-size:15px;color:#333333;margin:0;}
 audio{width:100%;margin:12px 0 4px} .btns{display:flex;gap:8px} button{cursor:pointer;background:#F2DFA0;border:0;color:#2A2410;font-weight:700;padding:11px 14px;border-radius:10px}
 button.ghost{background:#3A3A40;color:#F2DFA0} 
@@ -149,14 +150,14 @@ async function openLyricsModal(){
   if(!currentSong){ alert('請先選一首歌'); return; }
   if(currentSong.status === "未上架"){
     lyricsModalTitle.textContent = currentSong.work || '歌詞 / 歌曲說明';
-    lyricsModalSub.textContent = currentSong.version ? '(' + currentSong.version + ')' : '';
+    lyricsModalSub.textContent = '';
     lyricsModalText.textContent = '這首還在準備中，錄好後就會在這裡上架。';
     lyricsModal.classList.remove('hidden');
     document.body.style.overflow = 'hidden';
     return;
   }
   lyricsModalTitle.textContent = currentSong.work || currentSong.title || '歌詞 / 歌曲說明';
-  lyricsModalSub.textContent = currentSong.version ? '(' + currentSong.version + ')' : '';
+  lyricsModalSub.textContent = '';
   lyricsModalText.textContent = '載入中...';
   lyricsModal.classList.remove('hidden');
   document.body.style.overflow = 'hidden';
