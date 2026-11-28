@@ -135,8 +135,8 @@ code{background:#333333;color:#FF8C42;padding:2px 6px;border-radius:6px} .how{co
   #playerCard .open-lyrics-wrap{flex:1 !important;display:flex !important;align-items:center !important;justify-content:center !important;margin:0 !important;padding:10px 0 !important;}
 }
 @media(max-width:820px){
-  /* 手機版選單區：上面 padding 從 10px 改成 24px，跟下面 24px 一樣，選單往下移一點，上下距離一樣 */
-  .controls{position: fixed !important;top: 68px !important;left: 0 !important;right: 0 !important;z-index: 100 !important;background: #FF8C42 !important;background-color: #FF8C42 !important;opacity: 1 !important;border-bottom: 1px solid #E67E22;padding: 24px 12px 24px !important;margin: 0 !important;overflow:visible !important;}
+  /* 手機版選單區：橘色整塊拿掉，只留一條分界線，高度歸零，線就是標題跟播放區的界線 */
+  .controls{position: fixed !important;top: 68px !important;left: 0 !important;right: 0 !important;z-index: 100 !important;background: transparent !important;background-color: transparent !important;opacity: 1 !important;border-bottom: 1px solid #3A3A3E !important;padding: 0 !important;margin: 0 !important;height: 0 !important;min-height: 0 !important;overflow:visible !important;}
   body{padding-top: 0;}
   /* 手機版主頁：搜尋框跟兩個下拉選單都藏起來，不佔主頁位置，只有展開清單才會看到 */
   .controls #search{display:none !important;}
@@ -152,7 +152,7 @@ code{background:#333333;color:#FF8C42;padding:2px 6px;border-radius:6px} .how{co
   body.playlist-open #mobileSearch{display:block !important;flex-shrink:0 !important;margin-bottom:10px !important;}
   body.playlist-open #mobileFilters{display:flex !important;gap:8px !important;flex-shrink:0 !important;margin-bottom:10px !important;}
   body.playlist-open #list{display:block !important;flex:1 !important;overflow-y:auto !important;min-height:0 !important;}
-  /* 手機版播放清單按鈕：卡在搜尋區與播放區的界線上，上半部在黃色區、下半部在播放區 */
+  /* 手機版播放清單按鈕：卡在分界線上，上半部在標題區、下半部在播放區，分界線剛好穿過按鈕中間 */
   #playlistToggle{display:inline-flex !important;position:absolute !important;left:50% !important;bottom:0 !important;transform:translate(-50%,50%) !important;z-index:103 !important;align-items:center !important;justify-content:center !important;background:#26262B !important;color:#FF8C42 !important;border:1px solid #E67E22 !important;border-radius:99px !important;padding:6px 14px !important;font-size:13px !important;font-weight:700 !important;white-space:nowrap !important;box-shadow:0 4px 12px rgba(0,0,0,0.35) !important;}
   /* 手機版播放區：四個角改圓角 */
   #playerCard{border-radius:18px !important;overflow:hidden !important;border:1px solid #3A3A3E !important;}
@@ -432,7 +432,7 @@ function updatePlayerMode(){
   if(listCardEl) listCardEl.style.marginTop = '0px';
   const bottom = controls ? controls.getBoundingClientRect().bottom : 184;
   playerCard.style.position = 'fixed';
-  /* 手機版播放區往下移：搜尋列底部 +24px，剛好讓開那顆卡在界線上的播放清單按鈕，不再遮到它 */
+  /* 手機版播放區往下移：分界線底部 +24px，剛好讓開那顆卡在界線上的播放清單按鈕，不再遮到它 */
   playerCard.style.top = (bottom + 24) + 'px';
   playerCard.style.left = '12px';
   playerCard.style.right = '12px';
