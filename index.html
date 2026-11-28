@@ -7,6 +7,15 @@
 <style>
 .song.coming{ opacity: 0.55; }
 .coming-tag{ background: #6E6E6E !important; color: #fff !important; }
+/* 已上架 vs 未上架：顏色區分再明顯一點 */
+.song:not(.coming){ background:rgba(255,140,66,0.06); border-color:rgba(255,140,66,0.25) !important; }
+.song:not(.coming) .num{ background:#FF8C42 !important; color:#2A1708 !important; box-shadow:0 0 0 1px #FF8C42, 0 0 10px rgba(255,140,66,0.35); }
+.song:not(.coming) .tag{ background:#FF8C42 !important; color:#2A1708 !important; font-weight:800 !important; box-shadow:0 0 10px rgba(255,140,66,0.35); }
+.song.coming{ opacity:1 !important; background:#1E1E22 !important; border-color:#2E2E32 !important; }
+.song.coming b{ color:#8A8A8A !important; }
+.song.coming small{ color:#6E6E6E !important; }
+.song.coming .num{ background:#4A4A4E !important; color:#9A9A9A !important; box-shadow:none !important; }
+.song.coming .coming-tag{ background:#333338 !important; color:#9A9A9A !important; border:1px dashed #5A5A5E !important; font-weight:700 !important; box-shadow:none !important; }
 *{box-sizing:border-box} body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Microsoft JhengHei",sans-serif;background:#17171A;color:#F2F2F2}
 /* 標題區縮小一點高度，大標跟副標行距靠緊一點 */
 header{position:fixed;top:0;left:0;right:0;z-index:101;background:#1C1C1F;text-align:center;padding:10px 20px 8px;max-width:1100px;margin:auto;border-bottom:1px solid #3A3A3E} 
