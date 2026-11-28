@@ -66,7 +66,8 @@ select{flex:1 1 0;min-width:0;background:#1E1E22;color:#F2F2F2;border:1px solid 
   #playerCard audio{margin:0 0 2px !important;height:36px !important;}
   #openLyricsBtn{padding:8px 20px !important;border-radius:12px !important;gap:1px !important;}
   #openLyricsBtn .btn-main{font-size:13px !important;}
-  #openLyricsBtn .btn-sub{font-size:11px !important;}
+  /* 手機版第二行：跟電腦版一樣的淡淡字，不加粗、不變深 */
+  #openLyricsBtn .btn-sub{font-size:11px !important;font-weight:400 !important;color:rgba(42,23,8,0.62) !important;opacity:1 !important;}
 }
 h2{margin:14px 0 4px;font-size:26px;display:flex;justify-content:space-between;align-items:baseline;gap:12px;color:#FFFFFF} .sub{color:#A8A8A8;margin:0 0 14px}
 /* 創作年份那行拿掉 */
@@ -96,11 +97,9 @@ h2{margin:14px 0 4px;font-size:26px;display:flex;justify-content:space-between;a
   background:#FF8C42;color:#2A1708;font-weight:800;padding:12px 28px;border-radius:16px;border:0;cursor:pointer;text-decoration:none;
 }
 #openLyricsBtn .btn-main{font-size:15px;font-weight:800;line-height:1.3;}
-#openLyricsBtn .btn-sub{font-size:13px;font-weight:500;opacity:0.75;line-height:1.3;}
+/* 第二行 點我開啟：兩版共用同一個，淡淡的、不加粗 */
+#openLyricsBtn .btn-sub{font-size:13px;font-weight:400 !important;color:rgba(42,23,8,0.62) !important;opacity:1 !important;line-height:1.3;}
 #openLyricsBtn.disabled{opacity:0.45;pointer-events:none;}
-#openLyricsBtn .txt-mobile{display:none;}
-/* 電腦版 🖱 單獨壓暗一點，手機版 👇 不動 */
-#openLyricsBtn .mouse-emoji{display:inline-block;filter:brightness(0.55) saturate(1.2) contrast(1.1);}
 #playerCard .sub#meta{text-align:center !important;}
 /* 歌詞浮窗：不會佔滿整個螢幕，白底、深灰字 */
 .lyrics-modal{position:fixed;inset:0;z-index:300;display:flex;align-items:center;justify-content:center;padding:20px;}
@@ -135,9 +134,6 @@ code{background:#333333;color:#FF8C42;padding:2px 6px;border-radius:6px} .how{co
   body{padding-top: 0;}
   /* 手機版主頁：搜尋框藏起來，不佔主頁位置 */
   .controls #search{display:none !important;}
-  /* 手機版按鈕文字換成 👇 */
-  #openLyricsBtn .txt-desktop{display:none;}
-  #openLyricsBtn .txt-mobile{display:inline;}
   .lyrics-modal{padding:16px;}
   .lyrics-modal-card{max-height:80vh;padding:28px 18px 20px;}
   /* 手機版：只藏歌單列表 #list，不藏整張卡片，不然搜尋欄會跟著不見 */
@@ -187,7 +183,7 @@ code{background:#333333;color:#FF8C42;padding:2px 6px;border-radius:6px} .how{co
     <div class="open-lyrics-wrap">
       <button id="openLyricsBtn" type="button">
         <span class="btn-main">歌詞/歌曲說明</span>
-        <span class="btn-sub"><span class="txt-desktop">點我開啟</span></span><span class="txt-mobile">點我開啟</span></span>
+        <span class="btn-sub">點我開啟</span>
       </button>
     </div>
   </div>
