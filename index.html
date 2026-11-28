@@ -25,13 +25,12 @@
 .song.active .tag{ box-shadow:0 0 12px rgba(255,140,66,0.55) !important; }
 .song.active .coming-tag{ background:#333338 !important; color:#9A9A9A !important; border:1px dashed #5A5A5E !important; box-shadow:none !important; }
 *{box-sizing:border-box} body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Microsoft JhengHei",sans-serif;background:#26262B;color:#F2F2F2}
-/* 標題區：跟下面整片同一個顏色，不要分界線、不要色差 */
+/* 標題區：只動這裡，跟下面整片同一個顏色，不要分界線、不要色差 */
 header{position:fixed;top:0;left:0;right:0;z-index:101;background:#26262B;text-align:center;padding:10px 20px 8px;max-width:1100px;margin:auto;border-bottom:none} 
 header h1{margin:0;font-size:26px;line-height:1.15;color:#FF8C42;text-shadow:0 0 8px rgba(255,140,66,0.55),0 0 18px rgba(255,140,66,0.35),0 0 32px rgba(255,140,66,0.20)} 
 header p{color:#A8A8A8;margin:8px 0 0;line-height:1.2;font-size:14px;}
 .wrap{max-width:1100px;margin:auto;padding:16px 20px 40px;display:grid;grid-template-columns:340px 1fr;gap:18px;background:#26262B}
 @media(max-width:820px){
-  /* 手機版：標題區跟下面播放區顏色一致，都用播放器下方那整塊的顏色，分界線跟色差都拿掉，整片連在一起 */
   header{background:#26262B !important;border-bottom:none !important;}
   body{background:#26262B !important;}
   .wrap{display:flex;flex-direction:column;gap:0;padding:0 12px;background:#26262B;}
@@ -42,7 +41,8 @@ header p{color:#A8A8A8;margin:8px 0 0;line-height:1.2;font-size:14px;}
   background:#26262B !important;background-color:#26262B !important;opacity:1 !important;
   border-bottom:1px solid #3A3A3E;padding:0 16px 10px 16px;margin-bottom:0;
 }  /* 播放器放上面 */}
-.card{background:#26262B;border:none;border-radius:18px;padding:16px;box-shadow:none}
+/* 兩張卡：復原，邊框跟陰影都回來 */
+.card{background:#26262B;border:1px solid #3A3A3E;border-radius:18px;padding:16px;box-shadow:0 4px 18px rgba(0,0,0,0.35)}
 .controls{display:flex;gap:8px;flex-wrap:wrap;position:sticky;top:-16px;z-index:20;background:#FF8C42 !important;background-color:#FF8C42 !important;opacity:1 !important;margin:-16px -16px 12px;padding:16px;border-bottom:1px solid #E67E22} 
 input{flex:1 1 100%;min-width:0;background:#1E1E22;color:#F2F2F2;border:1px solid #3A3A3E;border-radius:10px;padding:10px}
 select{flex:1 1 0;min-width:0;background:#1E1E22;color:#F2F2F2;border:1px solid #3A3A3E;border-radius:10px;padding:10px}
@@ -138,7 +138,6 @@ code{background:#333333;color:#FF8C42;padding:2px 6px;border-radius:6px} .how{co
   #playerCard .open-lyrics-wrap{flex:1 !important;display:flex !important;align-items:center !important;justify-content:center !important;margin:0 !important;padding:10px 0 !important;}
 }
 @media(max-width:820px){
-  /* 手機版：標題跟播放區中間不再有分界線，按鈕左右那兩小段線也拿掉，只剩按鈕本身 */
   .controls{position: fixed !important;top: 100px !important;left: 0 !important;right: 0 !important;z-index: 105 !important;background: transparent !important;background-color: transparent !important;opacity: 1 !important;border-bottom: none !important;padding: 0 !important;margin: 0 !important;height: 0 !important;min-height: 0 !important;overflow:visible !important;}
   body{padding-top: 0;}
   /* 手機版主頁：搜尋框跟兩個下拉選單都藏起來，不佔主頁位置，只有展開清單才會看到 */
@@ -155,12 +154,12 @@ code{background:#333333;color:#FF8C42;padding:2px 6px;border-radius:6px} .how{co
   body.playlist-open #mobileSearch{display:block !important;flex-shrink:0 !important;margin-bottom:10px !important;}
   body.playlist-open #mobileFilters{display:flex !important;gap:8px !important;flex-shrink:0 !important;margin-bottom:10px !important;}
   body.playlist-open #list{display:block !important;flex:1 !important;overflow-y:auto !important;min-height:0 !important;}
-  /* 手機版播放清單按鈕：現在沒有分界線了，按鈕就直接浮在標題跟播放區中間 */
+  /* 手機版播放清單按鈕：左右那兩小段線放回來，各約半顆按鈕長，穿過按鈕中心 */
   #playlistToggle{display:inline-flex !important;position:absolute !important;left:50% !important;bottom:0 !important;transform:translate(-50%,50%) !important;z-index:106 !important;align-items:center !important;justify-content:center !important;background:#26262B !important;color:#FF8C42 !important;border:1px solid #E67E22 !important;border-radius:99px !important;padding:6px 14px !important;font-size:13px !important;font-weight:700 !important;white-space:nowrap !important;box-shadow:0 4px 12px rgba(0,0,0,0.35) !important;overflow:visible !important;}
-  #playlistToggle::before{display:none !important;content:none !important;}
-  #playlistToggle::after{display:none !important;content:none !important;}
-  /* 手機版播放區：四個角改圓角 */
-  #playerCard{border-radius:18px !important;overflow:hidden !important;border:1px solid #3A3A3E !important;}
+  #playlistToggle::before{content:"" !important;display:block !important;position:absolute !important;top:50% !important;right:100% !important;width:50% !important;height:1px !important;background:#3A3A3E !important;margin-right:6px !important;}
+  #playlistToggle::after{content:"" !important;display:block !important;position:absolute !important;top:50% !important;left:100% !important;width:50% !important;height:1px !important;background:#3A3A3E !important;margin-left:6px !important;}
+  /* 手機版播放卡：框恢復，四個角圓角，邊框跟陰影都回來 */
+  #playerCard{border-radius:18px !important;overflow:hidden !important;border:1px solid #3A3A3E !important;box-shadow:0 4px 18px rgba(0,0,0,0.35) !important;}
   #playerCard .cover{border-radius:18px !important;overflow:hidden !important;}
 }
 /* 手機版最終覆蓋：一定要放在最後面，不然會被上面共用的 18px 蓋掉 */
@@ -172,7 +171,7 @@ code{background:#333333;color:#FF8C42;padding:2px 6px;border-radius:6px} .how{co
   #playerCard audio{margin:0 0 2px !important;}
   /* 手機版封面：上面留 14px，下面留 0，才是獨立圖區，不再貼上面那條線 */
   #playerCard .cover{margin:14px auto 0 auto !important;border-radius:18px !important;}
-  #playerCard{border-radius:18px !important;overflow:hidden !important;}
+  #playerCard{border-radius:18px !important;overflow:hidden !important;border:1px solid #3A3A3E !important;box-shadow:0 4px 18px rgba(0,0,0,0.35) !important;}
 }
 </style>
 </head>
@@ -230,14 +229,12 @@ function updatePlaylistPanel(){
   if(window.innerWidth > 820){ document.body.classList.remove('playlist-open'); if(playlistPanelEl){ playlistPanelEl.style.top=''; playlistPanelEl.style.height=''; playlistPanelEl.style.maxHeight=''; } return; }
   if(!playlistOpen){ document.body.classList.remove('playlist-open'); return; }
   document.body.classList.add('playlist-open');
-  /* 歌單面板從按鈕下面直接往下長：上面接在按鈕底部，下面一路蓋到螢幕底部，把播放區整張蓋住，搜尋框在面板最上面 */
   const btnBottom = playlistToggle.getBoundingClientRect().bottom;
   const top = btnBottom;
   playlistPanelEl.style.top = top + 'px';
   playlistPanelEl.style.height = (window.innerHeight - top - 12) + 'px';
   playlistPanelEl.style.maxHeight = (window.innerHeight - top - 12) + 'px';
 }
-/* 手機版：清單收起來就把搜尋跟下拉選單都還原，下次展開就是沒搜尋的全部清單 */
 function resetMobileSearch(){
   if(window.innerWidth > 820) return;
   const s1 = document.getElementById('search');
@@ -266,7 +263,6 @@ function closePlaylist(){
   if(!playlistOpen) return;
   playlistOpen = false;
   playlistToggle.textContent = '展開播放清單▼';
-  /* 點了歌、清單自動收起來時，也順便把剛剛搜的關鍵字跟選單都還原 */
   resetMobileSearch();
   updatePlaylistPanel();
 }
@@ -320,12 +316,10 @@ function syncModeOptions(){
     if(MODE_SETTINGS[s.value]==="hide") s.value="全部";
   });
 }
-/* 未選歌時的括號：電腦跟手機不一樣 */
 function getEmptySub(){
   if(window.innerWidth > 820) return '(請從播放清單中選擇曲目進行播放)';
   return '(請開啟播放清單，選擇欲聆聽的曲目)';
 }
-/* 剛開網頁：不要載入任何歌，封面就是色塊+音符，歌詞按鈕藏起來，播放器留著但沒有音訊 */
 function showEmptyState(){
   current = -1; currentSong = null;
   const c = document.getElementById('cover');
@@ -359,7 +353,6 @@ function renderList(){
     const idx = songs.indexOf(s);
     const isComing = s.status === "未上架";
     const isActive = idx===current;
-    /* 未上架：只給看，不給點，onclick 直接不做事 */
     const clickAttr = isComing ? `onclick="return false;" aria-disabled="true" tabindex="-1"` : `onclick="play(${idx})"`;
     return `<button class="song ${isActive?'active':''} ${isComing?'coming':''}" ${clickAttr}>
       <span class="num">${displayIdx+1}</span>
@@ -370,16 +363,13 @@ function renderList(){
   }).join('');
 }
 function play(i){ if(!songs[i])return; const s=songs[i];
-  /* 未上架：點了也不會有反應，直接擋掉，不換歌、不換封面、不換播放器，清單也不收 */
   if(s.status === "未上架") return;
   current=i; currentSong = s;
-  /* 手機版：點了要聽的歌，清單自己收起來，點錯了要再點一次「展開播放清單▼」重選 */
   closePlaylist();
 document.getElementById('title').innerHTML='<span class="t-work">' + (s.work||s.title) + '</span><span class="t-ver">(' + s.version + ')</span>';   
 document.getElementById('meta').textContent = s.year ? '創作年份．' + s.year : '';
 document.getElementById('credits').innerHTML = '詞：' + (s.lyricist || '—') + '<br>曲：' + (s.composer || '—');
 const c=document.getElementById('cover');
-/* 封面圖：cover 或 image 都可以，寫哪一個都吃，沒有就用 coverColor 色塊，再沒有就用預設圖 */
 c.style.background = '';
 c.style.backgroundImage = '';
 c.style.backgroundColor = '';
@@ -395,10 +385,8 @@ if(coverImg){
   c.style.backgroundImage = "url('images/cover.jpg?v=2')";
   c.textContent = '';
 }
-/* 選了歌才出現歌詞按鈕 */
 const wrap = document.getElementById('lyricsWrap');
 if(wrap){ wrap.setAttribute('style',''); wrap.style.display = ''; }
-/* 點了歌只換歌，不自動播放：先停掉上一首，換好後停在 0:00，等使用者自己按播放鍵 */
 player.pause();
 player.autoplay = false;
 player.removeAttribute('autoplay');
@@ -407,11 +395,9 @@ player.load();
 player.pause();
 renderList(); syncDesktopHeight(); updatePlayerMode(); }
 document.getElementById('search').addEventListener('input',applyFilter); 
-/* 手機版清單裡的搜尋框：打什麼就同步到主搜尋框，一樣會過濾 */
 document.getElementById('searchMobile').addEventListener('input', function(){ document.getElementById('search').value = this.value; applyFilter(); });
 document.getElementById('filter').addEventListener('change',applyFilter);
 document.getElementById('filterStatus').addEventListener('change',applyFilter); 
-/* 手機版清單裡的兩個下拉選單：選了就同步到主選單，一樣會過濾 */
 document.getElementById('filterMobile').addEventListener('change', function(){ document.getElementById('filter').value = this.value; applyFilter(); });
 document.getElementById('filterStatusMobile').addEventListener('change', function(){ document.getElementById('filterStatus').value = this.value; applyFilter(); });
 const playerCard = document.getElementById('playerCard');
@@ -437,30 +423,24 @@ function updatePlayerMode(){
   if(listCardEl) listCardEl.style.marginTop = '0px';
   const bottom = controls ? controls.getBoundingClientRect().bottom : 184;
   playerCard.style.position = 'fixed';
-  /* 手機版播放區往下移：按鈕底部 +24px，剛好讓開那顆播放清單按鈕，不再遮到它 */
   playerCard.style.top = (bottom + 24) + 'px';
   playerCard.style.left = '12px';
   playerCard.style.right = '12px';
   playerCard.style.zIndex = '101';
   playerCard.style.maxHeight = '';
   playerCard.style.overflowY = 'visible';
-  /* 手機版：高度清掉，不要繼承電腦版等高的高度，不然螢幕越高被拉越長 */
   playerCard.style.height = '';
-  /* 手機版歌單是展開收合式，不再佔下面版面，下面不用留白 */
   if(wrapEl) wrapEl.style.paddingTop = '0px';
   requestAnimationFrame(() => { updatePlaylistPanel(); });
 }
 function syncDesktopHeight(){
   if(window.innerWidth <= 820){
-    /* 手機版不要等高，直接清掉高度 */
     playerCard.style.height = '';
     return;
   }
-  /* 電腦版：兩邊都撐滿 .wrap 的高度，不要再互相跟著對方變矮 */
   playerCard.style.height = '';
 }
 window.addEventListener('resize', () => { 
-  /* 還沒選歌時，轉直橫、改視窗大小，括號那句也要跟著換成對應版本 */
   if(current === -1 && !currentSong){ 
     const t = document.getElementById('title');
     if(t) t.innerHTML = '<span class="t-work">未選擇曲目</span><span class="t-ver">' + getEmptySub() + '</span>';
