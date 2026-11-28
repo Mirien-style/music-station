@@ -32,7 +32,12 @@ select{flex:1 1 0;min-width:0;background:#1E1E22;color:#F2F2F2;border:1px solid 
 .tag{font-size:12px;background:#F2DFA0;color:#2A2410;padding:3px 8px;border-radius:99px;white-space:nowrap}
 .cover{height:260px;border-radius:14px;display:grid;place-items:center;font-size:64px;font-weight:900;color:#2A2410;background-size:cover;background-position:center 38%;}
 @media(max-width:820px){
-  .cover{height:150px !important; border-radius:0; margin:-0px -16px 0 -16px;}
+  /* 手機版：播放器高度跟著內容走，不要被拉長，封面高度跟著螢幕寬度自動調整 */
+  #playerCard{height:auto !important;min-height:0 !important;display:block !important;flex:none !important;}
+  #playerCard .open-lyrics-wrap{flex:none !important;display:block !important;}
+  .cover{height:clamp(120px, 32vw, 170px) !important; border-radius:0; margin:-0px -16px 0 -16px;}
+  #playerCard h2#title{margin:12px 0 8px !important;}
+  #playerCard audio{margin:8px 0 2px !important;}
 }
 h2{margin:14px 0 4px;font-size:26px;display:flex;justify-content:space-between;align-items:baseline;gap:12px;color:#FFFFFF} .sub{color:#A8A8A8;margin:0 0 14px}
 /* 創作年份那行拿掉 */
@@ -263,6 +268,8 @@ function updatePlayerMode(){
   playerCard.style.zIndex = '101';
   playerCard.style.maxHeight = '';
   playerCard.style.overflowY = 'visible';
+  /* 手機版：高度清掉，不要繼承電腦版等高的高度，不然螢幕越高被拉越長 */
+  playerCard.style.height = '';
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
       const playerBottom = playerCard.getBoundingClientRect().bottom;
@@ -271,7 +278,11 @@ function updatePlayerMode(){
   });
 }
 function syncDesktopHeight(){
-  if(window.innerWidth <= 820) return;
+  if(window.innerWidth <= 820){
+    /* 手機版不要等高，直接清掉高度 */
+    playerCard.style.height = '';
+    return;
+  }
   const listCard = document.querySelector('.wrap .card:first-child');
   if(!listCard) return;
   playerCard.style.height = '';
