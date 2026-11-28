@@ -62,7 +62,6 @@ code{background:#333333;color:#F2DFA0;padding:2px 6px;border-radius:6px} .how{co
     max-height: 100%;
     overflow-y: auto;
   }
-  /* 電腦版：歌詞收起時，播放器卡跟歌單卡等高 */
   #playerCard{
     overflow-y: auto;
   }
@@ -83,6 +82,11 @@ code{background:#333333;color:#F2DFA0;padding:2px 6px;border-radius:6px} .how{co
   }
   body{
     padding-top: 204px;
+  }
+  /* 手機版：歌詞展開時，只在播放器卡裡面捲，不要把整張卡撐走 */
+  #playerCard.lyrics-open .lyrics{
+    max-height: 220px;
+    overflow-y: auto;
   }
 }
 </style>
@@ -146,6 +150,7 @@ function play(i){ if(!songs[i])return; current=i; const s=songs[i];
     player.load();
     renderList();
     syncDesktopHeight();
+    updatePlayerMode();
     return;
   }
 document.getElementById('title').innerHTML=(s.work||s.title)+'<span style="color:#A8A8A8; font-size:20px; ">('+s.version+')</span>';   
@@ -161,7 +166,7 @@ if(s.lyricsFile){
 } const c=document.getElementById('cover');
 c.style.background = '';
 c.style.backgroundImage = "url('images/cover.jpg?v=2')";
-c.textContent = ''; player.src=s.audio; renderList(); syncDesktopHeight(); }
+c.textContent = ''; player.src=s.audio; renderList(); syncDesktopHeight(); updatePlayerMode(); }
 document.getElementById('search').addEventListener('input',applyFilter); 
 document.getElementById('filter').addEventListener('change',applyFilter);
 document.getElementById('filterStatus').addEventListener('change',applyFilter); 
@@ -172,26 +177,38 @@ const lyricsBtn = document.getElementById('lyricsToggle');
 lyricsBox.classList.add('collapsed');
 lyricsBtn.textContent = '展開 ▼';
 const playerCard = document.getElementById('playerCard');
+/* 手機版：播放器永遠固定在搜尋欄下面，展開/收起只改變高度，位置不跳 */
 function updatePlayerMode(){
-  if(window.innerWidth > 820) return;
+  if(window.innerWidth > 820){
+    playerCard.style.position = '';
+    playerCard.style.top = '';
+    playerCard.style.left = '';
+    playerCard.style.right = '';
+    playerCard.style.zIndex = '';
+    playerCard.style.maxHeight = '';
+    playerCard.style.overflowY = '';
+    const listCardD = document.querySelector('.wrap .card:first-child');
+    if(listCardD) listCardD.style.marginTop = '';
+    return;
+  }
   const listCard = document.querySelector('.wrap .card:first-child');
   const controls = document.querySelector('.controls');
+  const bottom = controls ? controls.getBoundingClientRect().bottom : 204;
+  playerCard.style.position = 'fixed';
+  playerCard.style.top = bottom + 'px';
+  playerCard.style.left = '12px';
+  playerCard.style.right = '12px';
+  playerCard.style.zIndex = '101';
+  playerCard.style.maxHeight = '';
+  playerCard.style.overflowY = 'visible';
   if(lyricsOpen){
-    playerCard.style.position = 'relative';
-    playerCard.style.top = 'auto';
-    playerCard.style.left = 'auto';
-    playerCard.style.right = 'auto';
-    playerCard.style.zIndex = '1';
-    if(listCard) listCard.style.marginTop = '0';
+    playerCard.classList.add('lyrics-open');
   } else {
-    playerCard.style.position = 'fixed';
-    const bottom = controls ? controls.getBoundingClientRect().bottom : 200;
-    playerCard.style.top = bottom + 'px';
-    playerCard.style.left = '12px';
-    playerCard.style.right = '12px';
-    playerCard.style.zIndex = '101';
-    if(listCard) listCard.style.marginTop = '380px';
+    playerCard.classList.remove('lyrics-open');
   }
+  requestAnimationFrame(() => {
+    if(listCard) listCard.style.marginTop = (playerCard.offsetHeight + 12) + 'px';
+  });
 }
 /* 電腦版專用：歌詞收起時，播放器卡 = 歌單卡高度 */
 function syncDesktopHeight(){
