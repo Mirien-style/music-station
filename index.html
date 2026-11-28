@@ -28,11 +28,13 @@
 /* 標題區：只動這裡，跟下面整片同一個顏色，不要分界線、不要色差 */
 header{position:fixed;top:0;left:0;right:0;z-index:101;background:#26262B;text-align:center;padding:10px 20px 8px;max-width:1100px;margin:auto;border-bottom:none} 
 header h1{margin:0;font-size:26px;line-height:1.15;color:#FF8C42;text-shadow:0 0 8px rgba(255,140,66,0.55),0 0 18px rgba(255,140,66,0.35),0 0 32px rgba(255,140,66,0.20)} 
-/* Demo Ver. 再往下移一點，電腦跟手機都一樣 */
-header p{color:#A8A8A8;margin:12px 0 0;line-height:1.2;font-size:14px;}
+/* 電腦版 Demo Ver.：垂直置中於大標題底邊跟下方卡片頂端線之間 */
+header p{color:#A8A8A8;margin:20px 0 0;line-height:1.2;font-size:14px;}
 .wrap{max-width:1100px;margin:auto;padding:16px 20px 40px;display:grid;grid-template-columns:340px 1fr;gap:18px;background:#26262B}
 @media(max-width:820px){
   header{background:#26262B !important;border-bottom:none !important;}
+  /* 手機版 Demo Ver.：垂直置中於大標題底邊跟下面那顆清單按鈕中心之間 */
+  header p{margin:22px 0 0 !important;}
   body{background:#26262B !important;}
   .wrap{display:flex;flex-direction:column;gap:0;padding:0 12px;background:#26262B;}
   .wrap .card{border-radius:0;}
@@ -127,8 +129,8 @@ code{background:#333333;color:#FF8C42;padding:2px 6px;border-radius:6px} .how{co
 /* 播放清單按鈕：電腦版不要出現 */
 #playlistToggle{display:none !important;}
 @media(min-width:821px){
-  body{padding-top: 80px;}
-  .wrap{height: calc(100vh - 100px);align-items: stretch;}
+  body{padding-top: 88px;}
+  .wrap{height: calc(100vh - 108px);align-items: stretch;}
   .wrap .card{height:100%;max-height: 100%;overflow-y: auto;}
   /* 電腦版清單：滾軸位置先固定佔好，歌多歌少寬度都不變，不會被滾軸擠來擠去 */
   .wrap .card:first-child{overflow-y:scroll !important;scrollbar-gutter:stable !important;}
