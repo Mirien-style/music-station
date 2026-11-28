@@ -114,9 +114,10 @@ code{background:#333333;color:#F2DFA0;padding:2px 6px;border-radius:6px} .how{co
   #openLyricsBtn .txt-mobile{display:inline;}
   .lyrics-modal{padding:16px;}
   .lyrics-modal-card{max-height:80vh;padding:28px 18px 20px;}
-  /* 手機版：最下面的歌單先藏起來，展開時才從播放器下面滑出來 */
-  .wrap .card:first-child{display:none !important;}
-  body.playlist-open .wrap .card:first-child{display:block !important;position:fixed !important;left:12px !important;right:12px !important;z-index:102 !important;max-height:42vh !important;overflow-y:auto !important;border-radius:0 0 14px 14px !important;border-top:1px solid #3A3A3E !important;}
+  /* 手機版：只藏歌單列表 #list，不藏整張卡片，不然搜尋欄會跟著不見 */
+  #listCard{background:transparent !important;border:none !important;box-shadow:none !important;padding:0 !important;}
+  #list{display:none !important;}
+  body.playlist-open #list{display:block !important;position:fixed !important;left:12px !important;right:12px !important;z-index:102 !important;max-height:42vh !important;overflow-y:auto !important;background:#26262B !important;border:1px solid #3A3A3E !important;border-radius:0 0 14px 14px !important;padding:12px !important;box-shadow:0 12px 30px rgba(0,0,0,0.45) !important;}
   /* 手機版播放清單按鈕：卡在搜尋區與播放區的界線上，上半部在黃色區、下半部在播放區 */
   #playlistToggle{display:inline-flex !important;position:absolute !important;left:50% !important;bottom:0 !important;transform:translate(-50%,50%) !important;z-index:103 !important;align-items:center !important;justify-content:center !important;background:#26262B !important;color:#F2DFA0 !important;border:1px solid #D9C47E !important;border-radius:99px !important;padding:6px 14px !important;font-size:13px !important;font-weight:700 !important;white-space:nowrap !important;box-shadow:0 4px 12px rgba(0,0,0,0.35) !important;}
 }
@@ -171,13 +172,13 @@ let playlistOpen = false;
 const MODE_SETTINGS = {"鋼琴演示":"show","吉他彈唱":"show","官方正式":"hide"};
 const list=document.getElementById('list'), player=document.getElementById('player');
 const playlistToggle = document.getElementById('playlistToggle');
-const listCard = document.getElementById('listCard');
+const listEl = document.getElementById('list');
 function updatePlaylistPanel(){
-  if(window.innerWidth > 820){ document.body.classList.remove('playlist-open'); if(listCard){ listCard.style.top=''; } return; }
+  if(window.innerWidth > 820){ document.body.classList.remove('playlist-open'); if(listEl){ listEl.style.top=''; } return; }
   if(!playlistOpen){ document.body.classList.remove('playlist-open'); return; }
   document.body.classList.add('playlist-open');
   const playerBottom = document.getElementById('playerCard').getBoundingClientRect().bottom;
-  listCard.style.top = (playerBottom + 8) + 'px';
+  listEl.style.top = (playerBottom + 8) + 'px';
 }
 function togglePlaylist(){
   if(window.innerWidth > 820) return;
