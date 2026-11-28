@@ -106,13 +106,15 @@ h2{margin:14px 0 4px;font-size:26px;display:flex;justify-content:space-between;a
 .lyrics-modal{position:fixed;inset:0;z-index:300;display:flex;align-items:center;justify-content:center;padding:20px;}
 .lyrics-modal.hidden{display:none;}
 .lyrics-modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,0.55);}
-.lyrics-modal-card{position:relative;background:#FFFFFF;color:#333333;width:100%;max-width:560px;max-height:78vh;overflow-y:auto;border-radius:16px;padding:30px 24px 24px;box-shadow:0 12px 40px rgba(0,0,0,0.35);}
-.lyrics-modal-close{position:absolute;top:10px;right:12px;background:transparent;border:0;font-size:22px;line-height:1;color:#333333;cursor:pointer;padding:6px 8px;}
+/* 歌詞浮窗：卡片本身不滑，只有歌詞那一塊滑，叉叉固定在右上角不動 */
+.lyrics-modal-card{position:relative;background:#FFFFFF;color:#333333;width:100%;max-width:560px;max-height:78vh;overflow:hidden;display:flex;flex-direction:column;border-radius:16px;padding:30px 24px 24px;box-shadow:0 12px 40px rgba(0,0,0,0.35);}
+.lyrics-modal-close{position:absolute;top:10px;right:12px;z-index:5;background:#FFFFFF;border:0;font-size:22px;line-height:1;color:#333333;cursor:pointer;padding:6px 8px;border-radius:8px;}
 /* 浮窗歌名：真正置於浮窗正中間，左右對稱，不再被 ✕ 推歪 */
-.lyrics-modal-title{margin:0 0 16px 0 !important;padding:0 32px !important;width:100% !important;box-sizing:border-box !important;font-size:20px;font-weight:800;color:#333333;text-align:center !important;}
+.lyrics-modal-title{margin:0 0 16px 0 !important;padding:0 32px !important;width:100% !important;box-sizing:border-box !important;font-size:20px;font-weight:800;color:#333333;text-align:center !important;flex-shrink:0;}
 /* 浮窗裡的模式那行 (鋼琴演示) 不要顯示 */
 .lyrics-modal-sub{display:none !important;margin:0 !important;padding:0 !important;height:0 !important;overflow:hidden;}
-.lyrics-modal-text{white-space:pre-wrap;line-height:2;font-size:15px;color:#333333;margin:0;}
+/* 歌詞內文：只有這裡會滑，滑再多叉叉都不會被滑掉 */
+.lyrics-modal-text{white-space:pre-wrap;line-height:2;font-size:15px;color:#333333;margin:0;overflow-y:auto;flex:1;min-height:0;padding-right:4px;}
 audio{width:100%;margin:12px 0 4px} .btns{display:flex;gap:8px} button{cursor:pointer;background:#FF8C42;border:0;color:#2A1708;font-weight:700;padding:11px 14px;border-radius:10px}
 button.ghost{background:#3A3A40;color:#FF8C42} 
 code{background:#333333;color:#FF8C42;padding:2px 6px;border-radius:6px} .how{color:#D0D0D0;line-height:1.9} .how li{margin:6px 0}
@@ -334,14 +336,14 @@ c.style.backgroundImage = '';
 c.style.backgroundColor = '';
 const coverImg = s.cover || s.image;
 if(coverImg){
-  c.style.backgroundImage = "url('" + coverImg + "?v=3')";
+  c.style.backgroundImage = "url('" + coverImg + "?v=2')";
   c.textContent = '';
 } else if(s.coverColor){
   c.style.backgroundColor = s.coverColor;
   c.style.backgroundImage = '';
   c.textContent = '♪';
 } else {
-  c.style.backgroundImage = "url('images/cover.jpg?v=3')";
+  c.style.backgroundImage = "url('images/cover.jpg?v=2')";
   c.textContent = '';
 }
 /* 點了歌只換歌，不自動播放：先停掉上一首，換好後停在 0:00，等使用者自己按播放鍵 */
