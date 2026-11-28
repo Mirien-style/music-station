@@ -180,12 +180,12 @@ code{background:#333333;color:#FF8C42;padding:2px 6px;border-radius:6px} .how{co
     </div>
   </div>
   <div class="card" id="playerCard">
-    <div id="cover" class="cover">♪</div>
-    <h2 id="title">載入中…</h2>
-    <audio id="player" controls preload="metadata"></audio>
+    <div id="cover" class="cover" style="background-color:#FF8C42;">♪</div>
+    <h2 id="title"><span class="t-work">未選擇曲目</span><span class="t-ver">(請從撥放清單中選擇曲目)</span></h2>
+    <audio id="player" controls preload="none"></audio>
     <p class="sub" id="meta" style="margin:8px 0 0;"></p>
     <p class="sub" id="credits" style="font-size:14px; color:#A8A8A8; margin:0; line-height:1.3; display:none;"></p>
-    <div class="open-lyrics-wrap">
+    <div class="open-lyrics-wrap" id="lyricsWrap" style="display:none !important;">
       <button id="openLyricsBtn" type="button">
         <span class="btn-main">歌詞/歌曲說明</span>
         <span class="btn-sub">點我開啟</span>
@@ -204,7 +204,7 @@ code{background:#333333;color:#FF8C42;padding:2px 6px;border-radius:6px} .how{co
   </div>
 </div>
 <script>
-let songs=[], current=0, auto=true, filtered=[];
+let songs=[], current=-1, auto=true, filtered=[];
 let currentSong = null;
 let playlistOpen = false;
 const MODE_SETTINGS = {"鋼琴演示":"show","吉他彈唱":"show","官方正式":"hide"};
@@ -290,13 +290,32 @@ async function openLyricsModal(){
 }
 openLyricsBtn.addEventListener('click', openLyricsModal);
 function syncModeOptions(){ const sel=document.getElementById('filter'); [...sel.options].forEach(o=>{ if(o.value==="全部") return; o.hidden = (MODE_SETTINGS[o.text]==="hide"); }); if(MODE_SETTINGS[sel.value]==="hide") sel.value="全部"; }
+/* 未選歌時的括號：電腦跟手機不一樣 */
+function getEmptySub(){
+  if(window.innerWidth > 820) return '(請從撥放清單中選擇曲目)';
+  return '(請開啟播放清單，選擇欲聆聽的曲目)';
+}
+/* 剛開網頁：不要載入任何歌，封面就是色塊+音符，歌詞按鈕藏起來，播放器留著但沒有音訊 */
+function showEmptyState(){
+  current = -1; currentSong = null;
+  const c = document.getElementById('cover');
+  c.style.background = ''; c.style.backgroundImage = ''; c.style.backgroundColor = '#FF8C42';
+  c.textContent = '♪';
+  document.getElementById('title').innerHTML = '<span class="t-work">未選擇曲目</span><span class="t-ver">' + getEmptySub() + '</span>';
+  document.getElementById('meta').textContent = '';
+  document.getElementById('credits').innerHTML = '';
+  const wrap = document.getElementById('lyricsWrap');
+  if(wrap){ wrap.style.display = 'none !important'; wrap.setAttribute('style','display:none !important;'); }
+  player.pause(); player.removeAttribute('src'); player.load();
+  renderList();
+}
 async function load(){
   try{
     const r = await fetch('songs.json');
     if(!r.ok) throw new Error('songs.json HTTP ' + r.status);
     songs = await r.json();
     if(!Array.isArray(songs) || songs.length===0) throw new Error('songs.json 是空的');
-    syncModeOptions(); applyFilter(); play(0);
+    syncModeOptions(); applyFilter(); showEmptyState();
   }catch(e){
     console.error(e);
     list.innerHTML = '<p style="padding:12px;line-height:1.8;color:#FFB0B0">載入失敗：找不到 songs.json<br>請確認 songs.json 跟 index.html 在同一個資料夾。</p>';
@@ -346,6 +365,9 @@ if(coverImg){
   c.style.backgroundImage = "url('images/cover.jpg?v=2')";
   c.textContent = '';
 }
+/* 選了歌才出現歌詞按鈕 */
+const wrap = document.getElementById('lyricsWrap');
+if(wrap){ wrap.setAttribute('style',''); wrap.style.display = ''; }
 /* 點了歌只換歌，不自動播放：先停掉上一首，換好後停在 0:00，等使用者自己按播放鍵 */
 player.pause();
 player.autoplay = false;
@@ -404,7 +426,14 @@ function syncDesktopHeight(){
   /* 電腦版：兩邊都撐滿 .wrap 的高度，不要再互相跟著對方變矮 */
   playerCard.style.height = '';
 }
-window.addEventListener('resize', () => { updatePlayerMode(); syncDesktopHeight(); });
+window.addEventListener('resize', () => { 
+  /* 還沒選歌時，轉直橫、改視窗大小，括號那句也要跟著換成對應版本 */
+  if(current === -1 && !currentSong){ 
+    const t = document.getElementById('title');
+    if(t) t.innerHTML = '<span class="t-work">未選擇曲目</span><span class="t-ver">' + getEmptySub() + '</span>';
+  }
+  updatePlayerMode(); syncDesktopHeight(); 
+});
 window.addEventListener('load', () => { updatePlayerMode(); syncDesktopHeight(); setTimeout(updatePlayerMode, 300); });
 load();
 </script>
