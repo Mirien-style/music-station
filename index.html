@@ -117,8 +117,8 @@ code{background:#333333;color:#FF8C42;padding:2px 6px;border-radius:6px} .how{co
 #playlistToggle{display:none !important;}
 @media(min-width:821px){
   body{padding-top: 80px;}
-  .wrap{height: calc(100vh - 100px);align-items: start;}
-  .wrap .card{max-height: 100%;overflow-y: auto;}
+  .wrap{height: calc(100vh - 100px);align-items: stretch;}
+  .wrap .card{height:100%;max-height: 100%;overflow-y: auto;}
   /* 電腦版清單：滾軸位置先固定佔好，歌多歌少寬度都不變，不會被滾軸擠來擠去 */
   .wrap .card:first-child{overflow-y:scroll !important;scrollbar-gutter:stable !important;}
   #playerCard{overflow-y: auto;}
@@ -362,10 +362,8 @@ function syncDesktopHeight(){
     playerCard.style.height = '';
     return;
   }
-  const listCardEl = document.querySelector('.wrap .card:first-child');
-  if(!listCardEl) return;
+  /* 電腦版：兩邊都撐滿 .wrap 的高度，不要再互相跟著對方變矮 */
   playerCard.style.height = '';
-  requestAnimationFrame(() => { playerCard.style.height = listCardEl.offsetHeight + 'px'; });
 }
 window.addEventListener('resize', () => { updatePlayerMode(); syncDesktopHeight(); });
 window.addEventListener('load', () => { updatePlayerMode(); syncDesktopHeight(); setTimeout(updatePlayerMode, 300); });
