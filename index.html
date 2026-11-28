@@ -334,14 +334,14 @@ c.style.backgroundImage = '';
 c.style.backgroundColor = '';
 const coverImg = s.cover || s.image;
 if(coverImg){
-  c.style.backgroundImage = "url('" + coverImg + "?v=2')";
+  c.style.backgroundImage = "url('" + coverImg + "?v=1')";
   c.textContent = '';
 } else if(s.coverColor){
   c.style.backgroundColor = s.coverColor;
   c.style.backgroundImage = '';
   c.textContent = '♪';
 } else {
-  c.style.backgroundImage = "url('images/cover.jpg?v=2')";
+  c.style.backgroundImage = "url('images/cover.jpg?v=1')";
   c.textContent = '';
 }
 /* 點了歌只換歌，不自動播放：先停掉上一首，換好後停在 0:00，等使用者自己按播放鍵 */
