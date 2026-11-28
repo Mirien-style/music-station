@@ -130,10 +130,10 @@ code{background:#333333;color:#FF8C42;padding:2px 6px;border-radius:6px} .how{co
 /* 播放清單按鈕：電腦版不要出現 */
 #playlistToggle{display:none !important;}
 @media(min-width:821px){
-  /* 電腦版：標題到頁面上方邊界 = 標題到 Demo Ver.，都是 24px */
-  header{top:14px !important;}
-  body{padding-top: 106px;}
-  .wrap{height: calc(100vh - 126px);align-items: stretch;}
+  /* 電腦版：標題到頁面上方邊界 = 標題到 Demo Ver.，視覺上兩邊一樣 */
+  header{top:22px !important;}
+  body{padding-top: 114px;}
+  .wrap{height: calc(100vh - 134px);align-items: stretch;}
   .wrap .card{height:100%;max-height: 100%;overflow-y: auto;}
   /* 電腦版清單：滾軸位置先固定佔好，歌多歌少寬度都不變，不會被滾軸擠來擠去 */
   .wrap .card:first-child{overflow-y:scroll !important;scrollbar-gutter:stable !important;}
@@ -382,14 +382,14 @@ c.style.backgroundImage = '';
 c.style.backgroundColor = '';
 const coverImg = s.cover || s.image;
 if(coverImg){
-  c.style.backgroundImage = "url('" + coverImg + "?v=1')";
+  c.style.backgroundImage = "url('" + coverImg + "?v=2')";
   c.textContent = '';
 } else if(s.coverColor){
   c.style.backgroundColor = s.coverColor;
   c.style.backgroundImage = '';
   c.textContent = '♪';
 } else {
-  c.style.backgroundImage = "url('images/cover.jpg?v=1')";
+  c.style.backgroundImage = "url('images/cover.jpg?v=2')";
   c.textContent = '';
 }
 const wrap = document.getElementById('lyricsWrap');
@@ -430,8 +430,8 @@ function updatePlayerMode(){
   if(listCardEl) listCardEl.style.marginTop = '0px';
   const bottom = controls ? controls.getBoundingClientRect().bottom : 184;
   playerCard.style.position = 'fixed';
-  /* 手機版播放卡：往下移 29px，讓按鈕下方線到卡片上方線 = 按鈕上方線到 Demo Ver. */
-  playerCard.style.top = (bottom + 29) + 'px';
+  /* 手機版播放卡：往下移 38px，讓按鈕下方線到卡片上方線 = 按鈕上方線到 Demo Ver. */
+  playerCard.style.top = (bottom + 38) + 'px';
   playerCard.style.left = '12px';
   playerCard.style.right = '12px';
   playerCard.style.zIndex = '101';
