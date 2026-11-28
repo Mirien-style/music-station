@@ -43,6 +43,9 @@ header p{color:#A8A8A8;margin:8px 0 0;line-height:1.2;font-size:14px;}
 .controls{display:flex;gap:8px;flex-wrap:wrap;position:sticky;top:-16px;z-index:20;background:#FF8C42 !important;background-color:#FF8C42 !important;opacity:1 !important;margin:-16px -16px 12px;padding:16px;border-bottom:1px solid #E67E22} 
 input{flex:1 1 100%;min-width:0;background:#1E1E22;color:#F2F2F2;border:1px solid #3A3A3E;border-radius:10px;padding:10px}
 select{flex:1 1 0;min-width:0;background:#1E1E22;color:#F2F2F2;border:1px solid #3A3A3E;border-radius:10px;padding:10px}
+/* 手機版清單裡的搜尋框：電腦版不要出現 */
+#mobileSearch{display:none;}
+#mobileSearch input{width:100%;}
 /* 清單每一排：邊框先固定 2px、高度先固定，選了也不要再撐大，才不會擠到隔壁 */
 .song{width:100%;text-align:left;background:transparent;border:2px solid transparent;color:#F2F2F2;padding:12px;border-radius:12px;cursor:pointer;display:flex;gap:10px;align-items:center;min-height:62px}
 .song b{font-weight:700 !important;}
@@ -130,6 +133,8 @@ code{background:#333333;color:#FF8C42;padding:2px 6px;border-radius:6px} .how{co
 @media(max-width:820px){
   .controls{position: fixed !important;top: 68px !important;left: 0 !important;right: 0 !important;z-index: 100 !important;background: #FF8C42 !important;background-color: #FF8C42 !important;opacity: 1 !important;border-bottom: 1px solid #E67E22;padding: 10px 12px 24px !important;margin: 0 !important;overflow:visible !important;}
   body{padding-top: 0;}
+  /* 手機版主頁：搜尋框藏起來，不佔主頁位置 */
+  .controls #search{display:none !important;}
   /* 手機版按鈕文字換成 👇 */
   #openLyricsBtn .txt-desktop{display:none;}
   #openLyricsBtn .txt-mobile{display:inline;}
@@ -137,9 +142,11 @@ code{background:#333333;color:#FF8C42;padding:2px 6px;border-radius:6px} .how{co
   .lyrics-modal-card{max-height:80vh;padding:28px 18px 20px;}
   /* 手機版：只藏歌單列表 #list，不藏整張卡片，不然搜尋欄會跟著不見 */
   #listCard{background:transparent !important;border:none !important;box-shadow:none !important;padding:0 !important;}
-  #list{display:none !important;}
-  /* 手機版展開歌單：從按鈕下面直接往下長，蓋住整個播放區 */
-  body.playlist-open #list{display:block !important;position:fixed !important;left:12px !important;right:12px !important;z-index:102 !important;overflow-y:auto !important;background:#26262B !important;border:1px solid #3A3A3E !important;border-radius:0 0 14px 14px !important;padding:12px !important;box-shadow:0 12px 30px rgba(0,0,0,0.45) !important;}
+  #playlistPanel{display:none !important;}
+  /* 手機版展開歌單：整個面板從按鈕下面直接往下長，蓋住整個播放區，搜尋框在最上面 */
+  body.playlist-open #playlistPanel{display:flex !important;flex-direction:column !important;position:fixed !important;left:12px !important;right:12px !important;z-index:102 !important;overflow:hidden !important;background:#26262B !important;border:1px solid #3A3A3E !important;border-radius:0 0 14px 14px !important;padding:12px !important;box-shadow:0 12px 30px rgba(0,0,0,0.45) !important;}
+  body.playlist-open #mobileSearch{display:block !important;flex-shrink:0 !important;margin-bottom:10px !important;}
+  body.playlist-open #list{display:block !important;flex:1 !important;overflow-y:auto !important;min-height:0 !important;}
   /* 手機版播放清單按鈕：卡在搜尋區與播放區的界線上，上半部在黃色區、下半部在播放區 */
   #playlistToggle{display:inline-flex !important;position:absolute !important;left:50% !important;bottom:0 !important;transform:translate(-50%,50%) !important;z-index:103 !important;align-items:center !important;justify-content:center !important;background:#26262B !important;color:#FF8C42 !important;border:1px solid #E67E22 !important;border-radius:99px !important;padding:6px 14px !important;font-size:13px !important;font-weight:700 !important;white-space:nowrap !important;box-shadow:0 4px 12px rgba(0,0,0,0.35) !important;}
   /* 手機版播放區：四個角改圓角 */
@@ -166,7 +173,10 @@ code{background:#333333;color:#FF8C42;padding:2px 6px;border-radius:6px} .how{co
     <select id="filter"><option value="全部">全部模式</option><option>鋼琴演示</option><option>吉他彈唱</option><option>官方正式</option></select><select id="filterStatus"><option value="全部">全部狀態</option><option>已上架</option><option>未上架</option></select>
     <button id="playlistToggle" type="button">展開播放清單▼</button>
     </div>
-    <div id="list"></div>
+    <div id="playlistPanel">
+      <div id="mobileSearch"><input id="searchMobile" placeholder="搜尋歌名…"></div>
+      <div id="list"></div>
+    </div>
   </div>
   <div class="card" id="playerCard">
     <div id="cover" class="cover">♪</div>
@@ -200,16 +210,17 @@ const MODE_SETTINGS = {"鋼琴演示":"show","吉他彈唱":"show","官方正式
 const list=document.getElementById('list'), player=document.getElementById('player');
 const playlistToggle = document.getElementById('playlistToggle');
 const listEl = document.getElementById('list');
+const playlistPanelEl = document.getElementById('playlistPanel');
 function updatePlaylistPanel(){
-  if(window.innerWidth > 820){ document.body.classList.remove('playlist-open'); if(listEl){ listEl.style.top=''; listEl.style.height=''; listEl.style.maxHeight=''; } return; }
+  if(window.innerWidth > 820){ document.body.classList.remove('playlist-open'); if(playlistPanelEl){ playlistPanelEl.style.top=''; playlistPanelEl.style.height=''; playlistPanelEl.style.maxHeight=''; } return; }
   if(!playlistOpen){ document.body.classList.remove('playlist-open'); return; }
   document.body.classList.add('playlist-open');
-  /* 歌單從按鈕下面直接往下長：上面接在按鈕底部，下面一路蓋到螢幕底部，把播放區整張蓋住 */
+  /* 歌單面板從按鈕下面直接往下長：上面接在按鈕底部，下面一路蓋到螢幕底部，把播放區整張蓋住，搜尋框在面板最上面 */
   const btnBottom = playlistToggle.getBoundingClientRect().bottom;
   const top = btnBottom;
-  listEl.style.top = top + 'px';
-  listEl.style.height = (window.innerHeight - top - 12) + 'px';
-  listEl.style.maxHeight = (window.innerHeight - top - 12) + 'px';
+  playlistPanelEl.style.top = top + 'px';
+  playlistPanelEl.style.height = (window.innerHeight - top - 12) + 'px';
+  playlistPanelEl.style.maxHeight = (window.innerHeight - top - 12) + 'px';
 }
 function togglePlaylist(){
   if(window.innerWidth > 820) return;
@@ -318,6 +329,8 @@ player.load();
 player.pause();
 renderList(); syncDesktopHeight(); updatePlayerMode(); }
 document.getElementById('search').addEventListener('input',applyFilter); 
+/* 手機版清單裡的搜尋框：打什麼就同步到主搜尋框，一樣會過濾 */
+document.getElementById('searchMobile').addEventListener('input', function(){ document.getElementById('search').value = this.value; applyFilter(); });
 document.getElementById('filter').addEventListener('change',applyFilter);
 document.getElementById('filterStatus').addEventListener('change',applyFilter); 
 const playerCard = document.getElementById('playerCard');
