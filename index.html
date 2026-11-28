@@ -152,8 +152,8 @@ code{background:#333333;color:#FF8C42;padding:2px 6px;border-radius:6px} .how{co
   /* 手機版：只藏歌單列表 #list，不藏整張卡片，不然搜尋欄會跟著不見 */
   #listCard{background:transparent !important;border:none !important;box-shadow:none !important;padding:0 !important;}
   #playlistPanel{display:none !important;}
-  /* 手機版展開歌單：整個面板從按鈕下面直接往下長，蓋住整個播放區，搜尋框在最上面，下面接兩個下拉選單，再下面才是歌單 */
-  body.playlist-open #playlistPanel{display:flex !important;flex-direction:column !important;position:fixed !important;left:12px !important;right:12px !important;z-index:102 !important;overflow:hidden !important;background:#26262B !important;border:1px solid #3A3A3E !important;border-radius:0 0 14px 14px !important;padding:12px !important;box-shadow:0 12px 30px rgba(0,0,0,0.45) !important;}
+  /* 手機版展開歌單：上面兩個角也改圓角，四個角都是圓的 */
+  body.playlist-open #playlistPanel{display:flex !important;flex-direction:column !important;position:fixed !important;left:12px !important;right:12px !important;z-index:102 !important;overflow:hidden !important;background:#26262B !important;border:1px solid #3A3A3E !important;border-radius:14px !important;padding:12px !important;box-shadow:0 12px 30px rgba(0,0,0,0.45) !important;}
   body.playlist-open #mobileSearch{display:block !important;flex-shrink:0 !important;margin-bottom:10px !important;}
   body.playlist-open #mobileFilters{display:flex !important;gap:8px !important;flex-shrink:0 !important;margin-bottom:10px !important;}
   body.playlist-open #list{display:block !important;flex:1 !important;overflow-y:auto !important;min-height:0 !important;}
