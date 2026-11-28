@@ -222,10 +222,20 @@ function updatePlaylistPanel(){
   playlistPanelEl.style.height = (window.innerHeight - top - 12) + 'px';
   playlistPanelEl.style.maxHeight = (window.innerHeight - top - 12) + 'px';
 }
+/* 手機版：清單收起來就把搜尋清空，下次展開就是沒搜尋的全部清單 */
+function resetMobileSearch(){
+  if(window.innerWidth > 820) return;
+  const s1 = document.getElementById('search');
+  const s2 = document.getElementById('searchMobile');
+  if(s1) s1.value = '';
+  if(s2) s2.value = '';
+  applyFilter();
+}
 function togglePlaylist(){
   if(window.innerWidth > 820) return;
   playlistOpen = !playlistOpen;
   playlistToggle.textContent = playlistOpen ? '收起播放清單▲' : '展開播放清單▼';
+  if(!playlistOpen) resetMobileSearch();
   updatePlaylistPanel();
 }
 function closePlaylist(){
@@ -233,6 +243,8 @@ function closePlaylist(){
   if(!playlistOpen) return;
   playlistOpen = false;
   playlistToggle.textContent = '展開播放清單▼';
+  /* 點了歌、清單自動收起來時，也順便把剛剛搜的關鍵字清掉 */
+  resetMobileSearch();
   updatePlaylistPanel();
 }
 if(playlistToggle) playlistToggle.addEventListener('click', togglePlaylist);
