@@ -119,6 +119,8 @@ code{background:#333333;color:#FF8C42;padding:2px 6px;border-radius:6px} .how{co
   body{padding-top: 80px;}
   .wrap{height: calc(100vh - 100px);align-items: start;}
   .wrap .card{max-height: 100%;overflow-y: auto;}
+  /* 電腦版清單：滾軸位置先固定佔好，歌多歌少寬度都不變，不會被滾軸擠來擠去 */
+  .wrap .card:first-child{overflow-y:scroll !important;scrollbar-gutter:stable !important;}
   #playerCard{overflow-y: auto;}
   /* 電腦版：播放器卡片直向排，按鈕那一區吃掉下面空白，按鈕置中在紅框區 */
   #playerCard{display:flex !important;flex-direction:column !important;}
@@ -215,6 +217,13 @@ function togglePlaylist(){
   playlistToggle.textContent = playlistOpen ? '收起播放清單▲' : '展開播放清單▼';
   updatePlaylistPanel();
 }
+function closePlaylist(){
+  if(window.innerWidth > 820) return;
+  if(!playlistOpen) return;
+  playlistOpen = false;
+  playlistToggle.textContent = '展開播放清單▼';
+  updatePlaylistPanel();
+}
 if(playlistToggle) playlistToggle.addEventListener('click', togglePlaylist);
 const openLyricsBtn = document.getElementById('openLyricsBtn');
 const lyricsModal = document.getElementById('lyricsModal');
@@ -288,16 +297,26 @@ function renderList(){
   }).join('');
 }
 function play(i){ if(!songs[i])return; const s=songs[i];
-  /* 未上架：點了也不會有反應，直接擋掉，不換歌、不換封面、不換播放器 */
+  /* 未上架：點了也不會有反應，直接擋掉，不換歌、不換封面、不換播放器，清單也不收 */
   if(s.status === "未上架") return;
   current=i; currentSong = s;
+  /* 手機版：點了要聽的歌，清單自己收起來，點錯了要再點一次「展開播放清單▼」重選 */
+  closePlaylist();
 document.getElementById('title').innerHTML='<span class="t-work">' + (s.work||s.title) + '</span><span class="t-ver">(' + s.version + ')</span>';   
 document.getElementById('meta').textContent = s.year ? '創作年份．' + s.year : '';
 document.getElementById('credits').innerHTML = '詞：' + (s.lyricist || '—') + '<br>曲：' + (s.composer || '—');
 const c=document.getElementById('cover');
 c.style.background = '';
 c.style.backgroundImage = "url('images/cover.jpg?v=2')";
-c.textContent = ''; player.src=s.audio; renderList(); syncDesktopHeight(); updatePlayerMode(); }
+c.textContent = '';
+/* 點了歌只換歌，不自動播放：先停掉上一首，換好後停在 0:00，等使用者自己按播放鍵 */
+player.pause();
+player.autoplay = false;
+player.removeAttribute('autoplay');
+player.src=s.audio;
+player.load();
+player.pause();
+renderList(); syncDesktopHeight(); updatePlayerMode(); }
 document.getElementById('search').addEventListener('input',applyFilter); 
 document.getElementById('filter').addEventListener('change',applyFilter);
 document.getElementById('filterStatus').addEventListener('change',applyFilter); 
