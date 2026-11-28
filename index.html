@@ -382,14 +382,14 @@ c.style.backgroundImage = '';
 c.style.backgroundColor = '';
 const coverImg = s.cover || s.image;
 if(coverImg){
-  c.style.backgroundImage = "url('" + coverImg + "?v=2')";
+  c.style.backgroundImage = "url('" + coverImg + "?v=1')";
   c.textContent = '';
 } else if(s.coverColor){
   c.style.backgroundColor = s.coverColor;
   c.style.backgroundImage = '';
   c.textContent = '♪';
 } else {
-  c.style.backgroundImage = "url('images/cover.jpg?v=2')";
+  c.style.backgroundImage = "url('images/cover.jpg?v=1')";
   c.textContent = '';
 }
 const wrap = document.getElementById('lyricsWrap');
