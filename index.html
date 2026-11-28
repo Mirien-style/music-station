@@ -58,8 +58,8 @@ select{flex:1 1 0;min-width:0;background:#1E1E22;color:#F2F2F2;border:1px solid 
   /* 手機版：播放器高度跟著內容走，不要被拉長 */
   #playerCard{height:auto !important;min-height:0 !important;display:block !important;flex:none !important;}
   #playerCard .open-lyrics-wrap{flex:none !important;display:block !important;margin:4px 0 2px !important;}
-  /* 手機版封面：150x150 正方形，四角圓角，置中，不再滿版頂到邊 */
-  .cover{width:150px !important;height:150px !important;aspect-ratio:1/1 !important;border-radius:18px !important;margin:0 auto !important;}
+  /* 手機版封面：150x150 正方形，四角圓角，置中，上面留 14px 不貼線 */
+  .cover{width:150px !important;height:150px !important;aspect-ratio:1/1 !important;border-radius:18px !important;margin:14px auto 0 auto !important;}
   /* 手機版歌名+模式視為一體，兩者之間行距不動，上下間距再更小一點 */
   #playerCard h2#title{margin:2px 0 0 !important;gap:2px !important;line-height:1.2 !important;}
   #playerCard h2#title .t-work{font-size:21px !important;line-height:1.2 !important;}
@@ -158,7 +158,8 @@ code{background:#333333;color:#FF8C42;padding:2px 6px;border-radius:6px} .how{co
   #playerCard h2#title .t-work{font-size:21px !important;line-height:1.2 !important;margin:0 !important;padding:0 !important;}
   #playerCard h2#title .t-ver{font-size:13px !important;line-height:1.2 !important;margin:0 !important;padding:0 0 2px !important;}
   #playerCard audio{margin:0 0 2px !important;}
-  #playerCard .cover{margin-bottom:0 !important;border-radius:18px !important;}
+  /* 手機版封面：上面留 14px，下面留 0，才是獨立圖區，不再貼上面那條線 */
+  #playerCard .cover{margin:14px auto 0 auto !important;border-radius:18px !important;}
   #playerCard{border-radius:18px !important;overflow:hidden !important;}
 }
 </style>
