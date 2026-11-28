@@ -7,7 +7,6 @@
 <style>
 .song.coming{ opacity: 0.55; }
 .coming-tag{ background: #6E6E6E !important; color: #fff !important; }
-/* 已上架 vs 未上架：顏色區分再明顯一點 */
 .song:not(.coming){ background:rgba(255,140,66,0.06); border-color:rgba(255,140,66,0.25) !important; }
 .song:not(.coming) .num{ background:#FF8C42 !important; color:#2A1708 !important; box-shadow:0 0 0 1px #FF8C42, 0 0 10px rgba(255,140,66,0.35); }
 .song:not(.coming) .tag{ background:#FF8C42 !important; color:#2A1708 !important; font-weight:800 !important; box-shadow:0 0 10px rgba(255,140,66,0.35); }
@@ -17,7 +16,6 @@
 .song.coming small{ color:#6E6E6E !important; }
 .song.coming .num{ background:#4A4A4E !important; color:#9A9A9A !important; box-shadow:none !important; }
 .song.coming .coming-tag{ background:#333338 !important; color:#9A9A9A !important; border:1px dashed #5A5A5E !important; font-weight:700 !important; box-shadow:none !important; }
-/* 已選的歌曲：在清單中更明顯，序號維持跟未選一樣的橘底，不變白色 */
 .song.active{ background:rgba(255,140,66,0.22) !important; border-color:#FF8C42 !important; box-shadow:0 0 0 1px #FF8C42, 0 0 18px rgba(255,140,66,0.45) !important; }
 .song.active b{ color:#FFB26B !important; font-weight:700 !important; }
 .song.active small{ color:#FFD9B8 !important; }
@@ -25,160 +23,107 @@
 .song.active .tag{ box-shadow:0 0 12px rgba(255,140,66,0.55) !important; }
 .song.active .coming-tag{ background:#333338 !important; color:#9A9A9A !important; border:1px dashed #5A5A5E !important; box-shadow:none !important; }
 *{box-sizing:border-box} body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Microsoft JhengHei",sans-serif;background:#26262B;color:#F2F2F2}
-/* 標題區：只動這裡，跟下面整片同一個顏色，不要分界線、不要色差 */
+body{ -webkit-user-select:none !important; user-select:none !important; -webkit-touch-callout:none !important; }
+img, .cover{ -webkit-user-drag:none !important; user-drag:none !important; pointer-events:none; }
 header{position:fixed;top:0;left:0;right:0;z-index:101;background:#26262B;text-align:center;padding:10px 20px 8px;max-width:1100px;margin:auto;border-bottom:none} 
 header h1{margin:0;font-size:26px;line-height:1.15;color:#FF8C42;text-shadow:0 0 8px rgba(255,140,66,0.55),0 0 18px rgba(255,140,66,0.35),0 0 32px rgba(255,140,66,0.20)} 
-/* 電腦版 Demo Ver.：再往下移一點，真正置中於大標題底邊跟下方卡片頂端線之間 */
 header p{color:#A8A8A8;margin:24px 0 0;line-height:1.2;font-size:14px;}
 .wrap{max-width:1100px;margin:auto;padding:16px 20px 40px;display:grid;grid-template-columns:340px 1fr;gap:18px;background:#26262B}
 @media(max-width:820px){
-  /* 手機版整體往下移 10px：標題上面多一點空間，標題以下所有距離都不變，只是整體一起往下 */
   header{top:10px !important;background:#26262B !important;border-bottom:none !important;}
-  /* 手機版 Demo Ver.：垂直置中於大標題底邊跟下面那顆清單按鈕上緣之間 */
   header p{margin:14px 0 0 !important;}
   body{background:#26262B !important;}
   .wrap{display:flex;flex-direction:column;gap:0;padding:0 12px;background:#26262B;}
   .wrap .card{border-radius:0;}
   .wrap .card:first-child{order:2; margin-top:0;}
-  .wrap .card:last-child{
-  order:1;position:fixed;top:190px;left:12px;right:12px;z-index:101;
-  background:#26262B !important;background-color:#26262B !important;opacity:1 !important;
-  border-bottom:1px solid #3A3A3E;padding:0 16px 10px 16px;margin-bottom:0;
-}  /* 播放器放上面 */}
-/* 兩張卡：復原，邊框跟陰影都回來 */
+  .wrap .card:last-child{ order:1;position:fixed;top:190px;left:12px;right:12px;z-index:101; background:#26262B !important;background-color:#26262B !important;opacity:1 !important; border-bottom:1px solid #3A3A3E;padding:0 16px 10px 16px;margin-bottom:0; }
+}
 .card{background:#26262B;border:1px solid #3A3A3E;border-radius:18px;padding:16px;box-shadow:0 4px 18px rgba(0,0,0,0.35)}
 .controls{display:flex;gap:8px;flex-wrap:wrap;position:sticky;top:-16px;z-index:20;background:#FF8C42 !important;background-color:#FF8C42 !important;opacity:1 !important;margin:-16px -16px 12px;padding:16px;border-bottom:1px solid #E67E22} 
 input{flex:1 1 100%;min-width:0;background:#1E1E22;color:#F2F2F2;border:1px solid #3A3A3E;border-radius:10px;padding:10px}
 select{flex:1 1 0;min-width:0;background:#1E1E22;color:#F2F2F2;border:1px solid #3A3A3E;border-radius:10px;padding:10px}
-/* 手機版清單裡的搜尋框跟下拉選單：電腦版不要出現 */
 #mobileSearch{display:none;}
 #mobileSearch input{width:100%;}
 #mobileFilters{display:none;}
 #mobileFilters select{flex:1 1 0;min-width:0;}
-/* 清單每一排：邊框先固定 2px、高度先固定，選了也不要再撐大，才不會擠到隔壁 */
 .song{width:100%;text-align:left;background:transparent;border:2px solid transparent;color:#F2F2F2;padding:12px;border-radius:12px;cursor:pointer;display:flex;gap:10px;align-items:center;min-height:62px}
 .song b{font-weight:700 !important;}
 .song.active,.song:hover{background:#3A3A40;border-color:#FF8C42}
 .num{width:26px;height:26px;border-radius:50%;background:#FF8C42;color:#2A1708;display:grid;place-items:center;font-size:13px;flex-shrink:0}
 .tag{font-size:12px;background:#FF8C42;color:#2A1708;padding:3px 8px;border-radius:99px;white-space:nowrap;flex-shrink:0}
-/* 封面：電腦版 260x260 正方形，四角圓角，置中 */
 .cover{width:260px;height:260px;aspect-ratio:1/1;margin:0 auto;border-radius:18px;display:grid;place-items:center;font-size:64px;font-weight:900;color:#2A1708;background-size:cover;background-position:center center;overflow:hidden;flex-shrink:0;}
 @media(max-width:820px){
-  /* 手機版：播放器高度跟著內容走，不要被拉長 */
   #playerCard{height:auto !important;min-height:0 !important;display:block !important;flex:none !important;}
   #playerCard .open-lyrics-wrap{flex:none !important;display:block !important;margin:4px 0 2px !important;}
-  /* 手機版封面：150x150 正方形，四角圓角，置中，上面留 14px 不貼線 */
   .cover{width:150px !important;height:150px !important;aspect-ratio:1/1 !important;border-radius:18px !important;margin:14px auto 0 auto !important;}
-  /* 手機版歌名+模式視為一體，兩者之間行距不動，上下間距再更小一點 */
   #playerCard h2#title{margin:2px 0 0 !important;gap:2px !important;line-height:1.2 !important;}
   #playerCard h2#title .t-work{font-size:21px !important;line-height:1.2 !important;}
   #playerCard h2#title .t-ver{font-size:13px !important;line-height:1.2 !important;}
   #playerCard audio{margin:0 0 2px !important;height:36px !important;}
   #openLyricsBtn{padding:8px 20px !important;border-radius:12px !important;gap:1px !important;}
   #openLyricsBtn .btn-main{font-size:13px !important;}
-  /* 手機版第二行：跟電腦版一樣的淡淡字，深一點但不跟第一行一樣深，不加粗 */
   #openLyricsBtn .btn-sub{font-size:11px !important;font-weight:400 !important;color:rgba(42,23,8,0.82) !important;opacity:1 !important;}
 }
 h2{margin:14px 0 4px;font-size:26px;display:flex;justify-content:space-between;align-items:baseline;gap:12px;color:#FFFFFF} .sub{color:#A8A8A8;margin:0 0 14px}
-/* 創作年份那行拿掉 */
 #meta{display:none !important;margin:0 !important;padding:0 !important;height:0 !important;overflow:hidden;}
-/* 播放器歌名：置中、上下兩排 */
-#playerCard h2#title{
-  display:flex !important;
-  flex-direction:column !important;
-  align-items:center !important;
-  justify-content:center !important;
-  text-align:center !important;
-  gap:4px !important;
-  margin:18px 0 10px !important;
-  line-height:1.3 !important;
-}
+#playerCard h2#title{ display:flex !important; flex-direction:column !important; align-items:center !important; justify-content:center !important; text-align:center !important; gap:4px !important; margin:18px 0 10px !important; line-height:1.3 !important; }
 #title .t-work{display:block !important;width:100%;text-align:center !important;font-size:26px;font-weight:800;color:#FFFFFF;}
 #title .t-ver{display:block !important;width:100%;text-align:center !important;font-size:16px;font-weight:500;color:#A8A8A8;}
-/* 按鈕往上挪一點，電腦手機都一樣 */
 .open-lyrics-wrap{text-align:center !important;margin:6px 0 6px;}
-#openLyricsBtn{
-  display:inline-flex !important;
-  flex-direction:column !important;
-  align-items:center !important;
-  justify-content:center !important;
-  text-align:center !important;
-  gap:3px;
-  background:#FF8C42;color:#2A1708;font-weight:800;padding:12px 28px;border-radius:16px;border:0;cursor:pointer;text-decoration:none;
-}
+#openLyricsBtn{ display:inline-flex !important; flex-direction:column !important; align-items:center !important; justify-content:center !important; text-align:center !important; gap:3px; background:#FF8C42;color:#2A1708;font-weight:800;padding:12px 28px;border-radius:16px;border:0;cursor:pointer;text-decoration:none; }
 #openLyricsBtn .btn-main{font-size:15px;font-weight:800;line-height:1.3;}
-/* 第二行 點我開啟：兩版共用同一個，深一點但不跟第一行一樣深，不加粗 */
 #openLyricsBtn .btn-sub{font-size:13px;font-weight:400 !important;color:rgba(42,23,8,0.82) !important;opacity:1 !important;line-height:1.3;}
 #openLyricsBtn.disabled{opacity:0.45;pointer-events:none;}
 #playerCard .sub#meta{text-align:center !important;}
-/* 歌詞浮窗：不會佔滿整個螢幕，白底、深灰字 */
 .lyrics-modal{position:fixed;inset:0;z-index:300;display:flex;align-items:center;justify-content:center;padding:20px;}
 .lyrics-modal.hidden{display:none;}
 .lyrics-modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,0.55);}
-/* 歌詞浮窗：卡片本身不滑，只有歌詞那一塊滑，叉叉固定在右上角不動 */
 .lyrics-modal-card{position:relative;background:#FFFFFF;color:#333333;width:100%;max-width:560px;max-height:78vh;overflow:hidden;display:flex;flex-direction:column;border-radius:16px;padding:30px 24px 24px;box-shadow:0 12px 40px rgba(0,0,0,0.35);}
 .lyrics-modal-close{position:absolute;top:10px;right:12px;z-index:5;background:#FFFFFF;border:0;font-size:22px;line-height:1;color:#333333;cursor:pointer;padding:6px 8px;border-radius:8px;}
-/* 浮窗歌名：真正置於浮窗正中間，左右對稱，不再被 ✕ 推歪 */
 .lyrics-modal-title{margin:0 0 16px 0 !important;padding:0 32px !important;width:100% !important;box-sizing:border-box !important;font-size:20px;font-weight:800;color:#333333;text-align:center !important;flex-shrink:0;}
-/* 浮窗裡的模式那行 (鋼琴演示) 不要顯示 */
 .lyrics-modal-sub{display:none !important;margin:0 !important;padding:0 !important;height:0 !important;overflow:hidden;}
-/* 歌詞內文：只有這裡會滑，滑再多叉叉都不會被滑掉 */
-.lyrics-modal-text{white-space:pre-wrap;line-height:2;font-size:15px;color:#333333;margin:0;overflow-y:auto;flex:1;min-height:0;padding-right:4px;}
+.lyrics-modal-text{white-space:pre-wrap;line-height:2;font-size:15px;color:#333333;margin:0;overflow-y:auto;flex:1;min-height:0;padding-right:4px; -webkit-user-select:none !important; user-select:none !important;}
 audio{width:100%;margin:12px 0 4px} .btns{display:flex;gap:8px} button{cursor:pointer;background:#FF8C42;border:0;color:#2A1708;font-weight:700;padding:11px 14px;border-radius:10px}
 button.ghost{background:#3A3A40;color:#FF8C42} 
 code{background:#333333;color:#FF8C42;padding:2px 6px;border-radius:6px} .how{color:#D0D0D0;line-height:1.9} .how li{margin:6px 0}
-/* 播放清單按鈕：電腦版不要出現 */
 #playlistToggle{display:none !important;}
 @media(min-width:821px){
-  /* 電腦版：標題到頁面上方邊界 = 標題到 Demo Ver.，視覺上兩邊一樣 */
   header{top:22px !important;}
   body{padding-top: 114px;}
   .wrap{height: calc(100vh - 134px);align-items: stretch;}
   .wrap .card{height:100%;max-height: 100%;overflow-y: auto;}
-  /* 電腦版清單：滾軸位置先固定佔好，歌多歌少寬度都不變，不會被滾軸擠來擠去 */
   .wrap .card:first-child{overflow-y:scroll !important;scrollbar-gutter:stable !important;}
   #playerCard{overflow-y: auto;}
-  /* 電腦版播放卡：中間那一整塊視為一體，上下一起置中，卡片上方到封面 = 按鈕下方到卡片下方，取平均 */
   #playerCard{display:flex !important;flex-direction:column !important;align-items:center !important;justify-content:center !important;}
   #playerCard .cover, #playerCard h2#title, #playerCard audio{flex-shrink:0 !important;}
   #playerCard .open-lyrics-wrap{flex:0 0 auto !important;display:block !important;margin:6px 0 0 !important;padding:0 !important;}
-  /* 電腦版未選歌：歌詞按鈕只隱形、不佔掉高度，封面、歌名、播放器位置跟選歌後一模一樣 */
   #playerCard .open-lyrics-wrap.lyrics-hidden{visibility:hidden !important;}
 }
 @media(max-width:820px){
-  /* 手機版：清單按鈕那一排也跟著整體往下移 10px，標題到按鈕的距離不變 */
   .controls{position: fixed !important;top: 110px !important;left: 0 !important;right: 0 !important;z-index: 105 !important;background: transparent !important;background-color: transparent !important;opacity: 1 !important;border-bottom: none !important;padding: 0 !important;margin: 0 !important;height: 0 !important;min-height: 0 !important;overflow:visible !important;}
   body{padding-top: 0;}
-  /* 手機版主頁：搜尋框跟兩個下拉選單都藏起來，不佔主頁位置，只有展開清單才會看到 */
   .controls #search{display:none !important;}
   .controls #filter{display:none !important;}
   .controls #filterStatus{display:none !important;}
   .lyrics-modal{padding:16px;}
   .lyrics-modal-card{max-height:80vh;padding:28px 18px 20px;}
-  /* 手機版：只藏歌單列表 #list，不藏整張卡片，不然搜尋欄會跟著不見 */
   #listCard{background:transparent !important;border:none !important;box-shadow:none !important;padding:0 !important;}
   #playlistPanel{display:none !important;}
-  /* 手機版展開歌單：上面兩個角也改圓角，四個角都是圓的 */
   body.playlist-open #playlistPanel{display:flex !important;flex-direction:column !important;position:fixed !important;left:12px !important;right:12px !important;z-index:102 !important;overflow:hidden !important;background:#26262B !important;border:1px solid #3A3A3E !important;border-radius:14px !important;padding:12px !important;box-shadow:0 12px 30px rgba(0,0,0,0.45) !important;}
   body.playlist-open #mobileSearch{display:block !important;flex-shrink:0 !important;margin-bottom:10px !important;}
   body.playlist-open #mobileFilters{display:flex !important;gap:8px !important;flex-shrink:0 !important;margin-bottom:10px !important;}
   body.playlist-open #list{display:block !important;flex:1 !important;overflow-y:auto !important;min-height:0 !important;}
-  /* 手機版播放清單按鈕：左右那兩小段線放回來，各約半顆按鈕長，穿過按鈕中心 */
   #playlistToggle{display:inline-flex !important;position:absolute !important;left:50% !important;bottom:0 !important;transform:translate(-50%,50%) !important;z-index:106 !important;align-items:center !important;justify-content:center !important;background:#26262B !important;color:#FF8C42 !important;border:1px solid #E67E22 !important;border-radius:99px !important;padding:6px 14px !important;font-size:13px !important;font-weight:700 !important;white-space:nowrap !important;box-shadow:0 4px 12px rgba(0,0,0,0.35) !important;overflow:visible !important;}
   #playlistToggle::before{content:"" !important;display:block !important;position:absolute !important;top:50% !important;right:100% !important;width:50% !important;height:1px !important;background:#3A3A3E !important;margin-right:6px !important;}
   #playlistToggle::after{content:"" !important;display:block !important;position:absolute !important;top:50% !important;left:100% !important;width:50% !important;height:1px !important;background:#3A3A3E !important;margin-left:6px !important;}
-  /* 手機版播放卡：框恢復，四個角圓角，邊框跟陰影都回來 */
   #playerCard{border-radius:18px !important;overflow:hidden !important;border:1px solid #3A3A3E !important;box-shadow:0 4px 18px rgba(0,0,0,0.35) !important;}
   #playerCard .cover{border-radius:18px !important;overflow:hidden !important;}
 }
-/* 手機版最終覆蓋：一定要放在最後面，不然會被上面共用的 18px 蓋掉 */
 @media(max-width:820px){
-  /* 手機版：封面下面加 12px，才到歌名；歌名+模式那一整塊下面加 10px，才到播放器 */
   #playerCard h2#title{margin:12px 0 10px !important;gap:2px !important;line-height:1.2 !important;padding:0 !important;}
   #playerCard h2#title .t-work{font-size:21px !important;line-height:1.2 !important;margin:0 !important;padding:0 !important;}
   #playerCard h2#title .t-ver{font-size:13px !important;line-height:1.2 !important;margin:0 !important;padding:0 0 2px !important;}
   #playerCard audio{margin:0 0 2px !important;}
-  /* 手機版封面：上面留 14px，下面留 0，才是獨立圖區，不再貼上面那條線 */
   #playerCard .cover{margin:14px auto 0 auto !important;border-radius:18px !important;}
   #playerCard{border-radius:18px !important;overflow:hidden !important;border:1px solid #3A3A3E !important;box-shadow:0 4px 18px rgba(0,0,0,0.35) !important;}
 }
@@ -204,7 +149,8 @@ code{background:#333333;color:#FF8C42;padding:2px 6px;border-radius:6px} .how{co
   <div class="card" id="playerCard">
     <div id="cover" class="cover" style="background-color:#FF8C42;">♪</div>
     <h2 id="title"><span class="t-work">未選擇曲目</span><span class="t-ver">(請從播放清單中選擇曲目進行播放)</span></h2>
-    <audio id="player" controls preload="none"></audio>
+    <!-- 下載藏起來、不給投放：就是這一行 -->
+    <audio id="player" controls preload="none" controlsList="nodownload noplaybackrate" disableRemotePlayback disablepictureinpicture></audio>
     <p class="sub" id="meta" style="margin:8px 0 0;"></p>
     <p class="sub" id="credits" style="font-size:14px; color:#A8A8A8; margin:0; line-height:1.3; display:none;"></p>
     <div class="open-lyrics-wrap lyrics-hidden" id="lyricsWrap">
@@ -215,7 +161,6 @@ code{background:#333333;color:#FF8C42;padding:2px 6px;border-radius:6px} .how{co
     </div>
   </div>
 </div>
-<!-- 歌詞浮窗 -->
 <div id="lyricsModal" class="lyrics-modal hidden">
   <div class="lyrics-modal-backdrop" id="lyricsBackdrop"></div>
   <div class="lyrics-modal-card">
@@ -226,6 +171,11 @@ code{background:#333333;color:#FF8C42;padding:2px 6px;border-radius:6px} .how{co
   </div>
 </div>
 <script>
+/* 擋右鍵、擋拖圖、擋選取複製 */
+document.addEventListener('contextmenu', e => { e.preventDefault(); });
+document.addEventListener('dragstart', e => { e.preventDefault(); });
+document.addEventListener('copy', e => { e.preventDefault(); });
+document.addEventListener('cut', e => { e.preventDefault(); });
 let songs=[], current=-1, auto=true, filtered=[];
 let currentSong = null;
 let playlistOpen = false;
@@ -246,18 +196,12 @@ function updatePlaylistPanel(){
 }
 function resetMobileSearch(){
   if(window.innerWidth > 820) return;
-  const s1 = document.getElementById('search');
-  const s2 = document.getElementById('searchMobile');
-  if(s1) s1.value = '';
-  if(s2) s2.value = '';
-  const f1 = document.getElementById('filter');
-  const f2 = document.getElementById('filterMobile');
-  if(f1) f1.value = '全部';
-  if(f2) f2.value = '全部';
-  const fs1 = document.getElementById('filterStatus');
-  const fs2 = document.getElementById('filterStatusMobile');
-  if(fs1) fs1.value = '全部';
-  if(fs2) fs2.value = '全部';
+  const s1 = document.getElementById('search'); const s2 = document.getElementById('searchMobile');
+  if(s1) s1.value = ''; if(s2) s2.value = '';
+  const f1 = document.getElementById('filter'); const f2 = document.getElementById('filterMobile');
+  if(f1) f1.value = '全部'; if(f2) f2.value = '全部';
+  const fs1 = document.getElementById('filterStatus'); const fs2 = document.getElementById('filterStatusMobile');
+  if(fs1) fs1.value = '全部'; if(fs2) fs2.value = '全部';
   applyFilter();
 }
 function togglePlaylist(){
@@ -317,13 +261,8 @@ async function openLyricsModal(){
 }
 openLyricsBtn.addEventListener('click', openLyricsModal);
 function syncModeOptions(){
-  const sel=document.getElementById('filter');
-  const selM=document.getElementById('filterMobile');
-  [sel, selM].forEach(s=>{
-    if(!s) return;
-    [...s.options].forEach(o=>{ if(o.value==="全部") return; o.hidden = (MODE_SETTINGS[o.text]==="hide"); });
-    if(MODE_SETTINGS[s.value]==="hide") s.value="全部";
-  });
+  const sel=document.getElementById('filter'); const selM=document.getElementById('filterMobile');
+  [sel, selM].forEach(s=>{ if(!s) return; [...s.options].forEach(o=>{ if(o.value==="全部") return; o.hidden = (MODE_SETTINGS[o.text]==="hide"); }); if(MODE_SETTINGS[s.value]==="hide") s.value="全部"; });
 }
 function getEmptySub(){
   if(window.innerWidth > 820) return '(請從播放清單中選擇曲目進行播放)';
@@ -338,10 +277,7 @@ function showEmptyState(){
   document.getElementById('meta').textContent = '';
   document.getElementById('credits').innerHTML = '';
   const wrap = document.getElementById('lyricsWrap');
-  if(wrap){
-    if(window.innerWidth > 820){ wrap.classList.add('lyrics-hidden'); wrap.style.display = ''; }
-    else { wrap.classList.remove('lyrics-hidden'); wrap.style.display = 'none'; }
-  }
+  if(wrap){ if(window.innerWidth > 820){ wrap.classList.add('lyrics-hidden'); wrap.style.display = ''; } else { wrap.classList.remove('lyrics-hidden'); wrap.style.display = 'none'; } }
   player.pause(); player.removeAttribute('src'); player.load();
   renderList();
 }
@@ -382,9 +318,7 @@ document.getElementById('title').innerHTML='<span class="t-work">' + (s.work||s.
 document.getElementById('meta').textContent = s.year ? '創作年份．' + s.year : '';
 document.getElementById('credits').innerHTML = '詞：' + (s.lyricist || '—') + '<br>曲：' + (s.composer || '—');
 const c=document.getElementById('cover');
-c.style.background = '';
-c.style.backgroundImage = '';
-c.style.backgroundColor = '';
+c.style.background = ''; c.style.backgroundImage = ''; c.style.backgroundColor = '';
 const coverImg = s.cover || s.image;
 if(coverImg){
   c.style.backgroundImage = "url('" + coverImg + "?v=2')";
@@ -399,12 +333,9 @@ if(coverImg){
 }
 const wrap = document.getElementById('lyricsWrap');
 if(wrap){ wrap.classList.remove('lyrics-hidden'); wrap.style.display = ''; }
-player.pause();
-player.autoplay = false;
-player.removeAttribute('autoplay');
+player.pause(); player.autoplay = false; player.removeAttribute('autoplay');
 player.src=s.audio;
-player.load();
-player.pause();
+player.load(); player.pause();
 renderList(); syncDesktopHeight(); updatePlayerMode(); }
 document.getElementById('search').addEventListener('input',applyFilter); 
 document.getElementById('searchMobile').addEventListener('input', function(){ document.getElementById('search').value = this.value; applyFilter(); });
@@ -414,50 +345,24 @@ document.getElementById('filterMobile').addEventListener('change', function(){ d
 document.getElementById('filterStatusMobile').addEventListener('change', function(){ document.getElementById('filterStatus').value = this.value; applyFilter(); });
 const playerCard = document.getElementById('playerCard');
 function updatePlayerMode(){
-  const wrapEl = document.querySelector('.wrap');
-  const listCardEl = document.querySelector('.wrap .card:first-child');
+  const wrapEl = document.querySelector('.wrap'); const listCardEl = document.querySelector('.wrap .card:first-child');
   if(window.innerWidth > 820){
-    document.body.style.paddingTop = '';
-    if(wrapEl) wrapEl.style.paddingTop = '';
-    if(listCardEl) listCardEl.style.marginTop = '';
-    playerCard.style.position = '';
-    playerCard.style.top = '';
-    playerCard.style.left = '';
-    playerCard.style.right = '';
-    playerCard.style.zIndex = '';
-    playerCard.style.maxHeight = '';
-    playerCard.style.overflowY = '';
-    updatePlaylistPanel();
-    return;
+    document.body.style.paddingTop = ''; if(wrapEl) wrapEl.style.paddingTop = ''; if(listCardEl) listCardEl.style.marginTop = '';
+    playerCard.style.position = ''; playerCard.style.top = ''; playerCard.style.left = ''; playerCard.style.right = ''; playerCard.style.zIndex = ''; playerCard.style.maxHeight = ''; playerCard.style.overflowY = '';
+    updatePlaylistPanel(); return;
   }
   const controls = document.querySelector('.controls');
-  document.body.style.paddingTop = '0px';
-  if(listCardEl) listCardEl.style.marginTop = '0px';
+  document.body.style.paddingTop = '0px'; if(listCardEl) listCardEl.style.marginTop = '0px';
   const bottom = controls ? controls.getBoundingClientRect().bottom : 184;
   playerCard.style.position = 'fixed';
-  /* 手機版播放卡：往下移 38px，讓按鈕下方線到卡片上方線 = 按鈕上方線到 Demo Ver. */
   playerCard.style.top = (bottom + 38) + 'px';
-  playerCard.style.left = '12px';
-  playerCard.style.right = '12px';
-  playerCard.style.zIndex = '101';
-  playerCard.style.maxHeight = '';
-  playerCard.style.overflowY = 'visible';
-  playerCard.style.height = '';
+  playerCard.style.left = '12px'; playerCard.style.right = '12px'; playerCard.style.zIndex = '101'; playerCard.style.maxHeight = ''; playerCard.style.overflowY = 'visible'; playerCard.style.height = '';
   if(wrapEl) wrapEl.style.paddingTop = '0px';
   requestAnimationFrame(() => { updatePlaylistPanel(); });
 }
-function syncDesktopHeight(){
-  if(window.innerWidth <= 820){
-    playerCard.style.height = '';
-    return;
-  }
-  playerCard.style.height = '';
-}
+function syncDesktopHeight(){ if(window.innerWidth <= 820){ playerCard.style.height = ''; return; } playerCard.style.height = ''; }
 window.addEventListener('resize', () => { 
-  if(current === -1 && !currentSong){ 
-    const t = document.getElementById('title');
-    if(t) t.innerHTML = '<span class="t-work">未選擇曲目</span><span class="t-ver">' + getEmptySub() + '</span>';
-  }
+  if(current === -1 && !currentSong){ const t = document.getElementById('title'); if(t) t.innerHTML = '<span class="t-work">未選擇曲目</span><span class="t-ver">' + getEmptySub() + '</span>'; }
   updatePlayerMode(); syncDesktopHeight(); 
 });
 window.addEventListener('load', () => { updatePlayerMode(); syncDesktopHeight(); setTimeout(updatePlayerMode, 300); });
