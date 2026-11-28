@@ -43,9 +43,11 @@ header p{color:#A8A8A8;margin:8px 0 0;line-height:1.2;font-size:14px;}
 .controls{display:flex;gap:8px;flex-wrap:wrap;position:sticky;top:-16px;z-index:20;background:#FF8C42 !important;background-color:#FF8C42 !important;opacity:1 !important;margin:-16px -16px 12px;padding:16px;border-bottom:1px solid #E67E22} 
 input{flex:1 1 100%;min-width:0;background:#1E1E22;color:#F2F2F2;border:1px solid #3A3A3E;border-radius:10px;padding:10px}
 select{flex:1 1 0;min-width:0;background:#1E1E22;color:#F2F2F2;border:1px solid #3A3A3E;border-radius:10px;padding:10px}
-/* 手機版清單裡的搜尋框：電腦版不要出現 */
+/* 手機版清單裡的搜尋框跟下拉選單：電腦版不要出現 */
 #mobileSearch{display:none;}
 #mobileSearch input{width:100%;}
+#mobileFilters{display:none;}
+#mobileFilters select{flex:1 1 0;min-width:0;}
 /* 清單每一排：邊框先固定 2px、高度先固定，選了也不要再撐大，才不會擠到隔壁 */
 .song{width:100%;text-align:left;background:transparent;border:2px solid transparent;color:#F2F2F2;padding:12px;border-radius:12px;cursor:pointer;display:flex;gap:10px;align-items:center;min-height:62px}
 .song b{font-weight:700 !important;}
@@ -136,16 +138,19 @@ code{background:#333333;color:#FF8C42;padding:2px 6px;border-radius:6px} .how{co
   /* 手機版選單區：上面 padding 從 10px 改成 24px，跟下面 24px 一樣，選單往下移一點，上下距離一樣 */
   .controls{position: fixed !important;top: 68px !important;left: 0 !important;right: 0 !important;z-index: 100 !important;background: #FF8C42 !important;background-color: #FF8C42 !important;opacity: 1 !important;border-bottom: 1px solid #E67E22;padding: 24px 12px 24px !important;margin: 0 !important;overflow:visible !important;}
   body{padding-top: 0;}
-  /* 手機版主頁：搜尋框藏起來，不佔主頁位置 */
+  /* 手機版主頁：搜尋框跟兩個下拉選單都藏起來，不佔主頁位置，只有展開清單才會看到 */
   .controls #search{display:none !important;}
+  .controls #filter{display:none !important;}
+  .controls #filterStatus{display:none !important;}
   .lyrics-modal{padding:16px;}
   .lyrics-modal-card{max-height:80vh;padding:28px 18px 20px;}
   /* 手機版：只藏歌單列表 #list，不藏整張卡片，不然搜尋欄會跟著不見 */
   #listCard{background:transparent !important;border:none !important;box-shadow:none !important;padding:0 !important;}
   #playlistPanel{display:none !important;}
-  /* 手機版展開歌單：整個面板從按鈕下面直接往下長，蓋住整個播放區，搜尋框在最上面 */
+  /* 手機版展開歌單：整個面板從按鈕下面直接往下長，蓋住整個播放區，搜尋框在最上面，下面接兩個下拉選單，再下面才是歌單 */
   body.playlist-open #playlistPanel{display:flex !important;flex-direction:column !important;position:fixed !important;left:12px !important;right:12px !important;z-index:102 !important;overflow:hidden !important;background:#26262B !important;border:1px solid #3A3A3E !important;border-radius:0 0 14px 14px !important;padding:12px !important;box-shadow:0 12px 30px rgba(0,0,0,0.45) !important;}
   body.playlist-open #mobileSearch{display:block !important;flex-shrink:0 !important;margin-bottom:10px !important;}
+  body.playlist-open #mobileFilters{display:flex !important;gap:8px !important;flex-shrink:0 !important;margin-bottom:10px !important;}
   body.playlist-open #list{display:block !important;flex:1 !important;overflow-y:auto !important;min-height:0 !important;}
   /* 手機版播放清單按鈕：卡在搜尋區與播放區的界線上，上半部在黃色區、下半部在播放區 */
   #playlistToggle{display:inline-flex !important;position:absolute !important;left:50% !important;bottom:0 !important;transform:translate(-50%,50%) !important;z-index:103 !important;align-items:center !important;justify-content:center !important;background:#26262B !important;color:#FF8C42 !important;border:1px solid #E67E22 !important;border-radius:99px !important;padding:6px 14px !important;font-size:13px !important;font-weight:700 !important;white-space:nowrap !important;box-shadow:0 4px 12px rgba(0,0,0,0.35) !important;}
@@ -176,6 +181,10 @@ code{background:#333333;color:#FF8C42;padding:2px 6px;border-radius:6px} .how{co
     </div>
     <div id="playlistPanel">
       <div id="mobileSearch"><input id="searchMobile" placeholder="搜尋歌名…"></div>
+      <div id="mobileFilters">
+        <select id="filterMobile"><option value="全部">全部模式</option><option>鋼琴演示</option><option>吉他彈唱</option><option>官方正式</option></select>
+        <select id="filterStatusMobile"><option value="全部">全部狀態</option><option>已上架</option><option>未上架</option></select>
+      </div>
       <div id="list"></div>
     </div>
   </div>
@@ -223,13 +232,21 @@ function updatePlaylistPanel(){
   playlistPanelEl.style.height = (window.innerHeight - top - 12) + 'px';
   playlistPanelEl.style.maxHeight = (window.innerHeight - top - 12) + 'px';
 }
-/* 手機版：清單收起來就把搜尋清空，下次展開就是沒搜尋的全部清單 */
+/* 手機版：清單收起來就把搜尋跟下拉選單都還原，下次展開就是沒搜尋的全部清單 */
 function resetMobileSearch(){
   if(window.innerWidth > 820) return;
   const s1 = document.getElementById('search');
   const s2 = document.getElementById('searchMobile');
   if(s1) s1.value = '';
   if(s2) s2.value = '';
+  const f1 = document.getElementById('filter');
+  const f2 = document.getElementById('filterMobile');
+  if(f1) f1.value = '全部';
+  if(f2) f2.value = '全部';
+  const fs1 = document.getElementById('filterStatus');
+  const fs2 = document.getElementById('filterStatusMobile');
+  if(fs1) fs1.value = '全部';
+  if(fs2) fs2.value = '全部';
   applyFilter();
 }
 function togglePlaylist(){
@@ -244,7 +261,7 @@ function closePlaylist(){
   if(!playlistOpen) return;
   playlistOpen = false;
   playlistToggle.textContent = '展開播放清單▼';
-  /* 點了歌、清單自動收起來時，也順便把剛剛搜的關鍵字清掉 */
+  /* 點了歌、清單自動收起來時，也順便把剛剛搜的關鍵字跟選單都還原 */
   resetMobileSearch();
   updatePlaylistPanel();
 }
@@ -289,7 +306,15 @@ async function openLyricsModal(){
   }
 }
 openLyricsBtn.addEventListener('click', openLyricsModal);
-function syncModeOptions(){ const sel=document.getElementById('filter'); [...sel.options].forEach(o=>{ if(o.value==="全部") return; o.hidden = (MODE_SETTINGS[o.text]==="hide"); }); if(MODE_SETTINGS[sel.value]==="hide") sel.value="全部"; }
+function syncModeOptions(){
+  const sel=document.getElementById('filter');
+  const selM=document.getElementById('filterMobile');
+  [sel, selM].forEach(s=>{
+    if(!s) return;
+    [...s.options].forEach(o=>{ if(o.value==="全部") return; o.hidden = (MODE_SETTINGS[o.text]==="hide"); });
+    if(MODE_SETTINGS[s.value]==="hide") s.value="全部";
+  });
+}
 /* 未選歌時的括號：電腦跟手機不一樣 */
 function getEmptySub(){
   if(window.innerWidth > 820) return '(請從播放清單中選擇曲目進行播放)';
@@ -381,6 +406,9 @@ document.getElementById('search').addEventListener('input',applyFilter);
 document.getElementById('searchMobile').addEventListener('input', function(){ document.getElementById('search').value = this.value; applyFilter(); });
 document.getElementById('filter').addEventListener('change',applyFilter);
 document.getElementById('filterStatus').addEventListener('change',applyFilter); 
+/* 手機版清單裡的兩個下拉選單：選了就同步到主選單，一樣會過濾 */
+document.getElementById('filterMobile').addEventListener('change', function(){ document.getElementById('filter').value = this.value; applyFilter(); });
+document.getElementById('filterStatusMobile').addEventListener('change', function(){ document.getElementById('filterStatus').value = this.value; applyFilter(); });
 const playerCard = document.getElementById('playerCard');
 function updatePlayerMode(){
   const wrapEl = document.querySelector('.wrap');
