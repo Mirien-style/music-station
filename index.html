@@ -7,7 +7,6 @@
 <style>
 .song.coming{ opacity: 0.55; }
 .coming-tag{ background: #6E6E6E !important; color: #fff !important; }
-  
 *{box-sizing:border-box} body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Microsoft JhengHei",sans-serif;background:#17171A;color:#F2F2F2}
 header{position:fixed;top:0;left:0;right:0;z-index:101;background:#1C1C1F;text-align:center;padding:16px 20px 10px;max-width:1100px;margin:auto;border-bottom:1px solid #3A3A3E} 
 header h1{margin:0;font-size:30px;color:#F2DFA0;text-shadow:0 0 8px rgba(242,223,160,0.55),0 0 18px rgba(242,223,160,0.35),0 0 32px rgba(242,223,160,0.20)} 
@@ -18,18 +17,9 @@ header p{color:#A8A8A8;margin:8px 0 0}
   .wrap .card{border-radius:0;}
   .wrap .card:first-child{order:2; margin-top:0;}
   .wrap .card:last-child{
-  order:1;
-  position:fixed;
-  top:200px;
-  left:12px;
-  right:12px;
-  z-index:101;
-  background:#26262B !important;
-  background-color:#26262B !important;
-  opacity:1 !important;
-  border-bottom:1px solid #3A3A3E;
-    padding:0 16px 16px 16px;
-  margin-bottom:0;
+  order:1;position:fixed;top:200px;left:12px;right:12px;z-index:101;
+  background:#26262B !important;background-color:#26262B !important;opacity:1 !important;
+  border-bottom:1px solid #3A3A3E;padding:0 16px 16px 16px;margin-bottom:0;
 }  /* 播放器放上面 */}
 .card{background:#26262B;border:1px solid #3A3A3E;border-radius:18px;padding:16px;box-shadow:0 4px 18px rgba(0,0,0,0.35)}
 .controls{display:flex;gap:8px;flex-wrap:wrap;position:sticky;top:-16px;z-index:20;background:#F2DFA0 !important;background-color:#F2DFA0 !important;opacity:1 !important;margin:-16px -16px 12px;padding:16px;border-bottom:1px solid #D9C47E} 
@@ -41,36 +31,13 @@ select{flex:1 1 0;min-width:0;background:#1E1E22;color:#F2F2F2;border:1px solid 
 .tag{font-size:12px;background:#F2DFA0;color:#2A2410;padding:3px 8px;border-radius:99px;white-space:nowrap}
 .cover{height:260px;border-radius:14px;display:grid;place-items:center;font-size:64px;font-weight:900;color:#2A2410;background-size:cover;background-position:center 38%;}
 @media(max-width:820px){
-       .cover{height:150px !important; border-radius:0; margin:-0px -16px 0 -16px;}
+  .cover{height:150px !important; border-radius:0; margin:-0px -16px 0 -16px;}
 }
 h2{margin:14px 0 4px;font-size:26px;display:flex;justify-content:space-between;align-items:baseline;gap:12px;color:#FFFFFF} .sub{color:#A8A8A8;margin:0 0 14px}
 /* 播放器歌名：同一行，左歌名、右版本，中間撐開 */
-#playerCard h2#title{
-  display:flex;
-  flex-direction:row;
-  justify-content:space-between;
-  align-items:baseline;
-  text-align:left;
-  gap:16px;
-  margin:16px 0 8px;
-  line-height:1.3;
-}
-#title .t-work{
-  display:block;
-  flex:1 1 auto;
-  min-width:0;
-  font-size:26px;
-  font-weight:800;
-  color:#FFFFFF;
-}
-#title .t-ver{
-  display:block;
-  flex-shrink:0;
-  white-space:nowrap;
-  font-size:16px;
-  font-weight:500;
-  color:#A8A8A8;
-}
+#playerCard h2#title{display:flex;flex-direction:row;justify-content:space-between;align-items:baseline;text-align:left;gap:16px;margin:16px 0 8px;line-height:1.3;}
+#title .t-work{display:block;flex:1 1 auto;min-width:0;font-size:26px;font-weight:800;color:#FFFFFF;}
+#title .t-ver{display:block;flex-shrink:0;white-space:nowrap;font-size:16px;font-weight:500;color:#A8A8A8;}
 audio{width:100%;margin:12px 0 10px} .btns{display:flex;gap:8px} button{cursor:pointer;background:#F2DFA0;border:0;color:#2A2410;font-weight:700;padding:11px 14px;border-radius:10px}
 button.ghost{background:#3A3A40;color:#F2DFA0} 
 .lyrics{white-space:pre-wrap;line-height:2;background:#1E1E22;color:#EDEDED;border-radius:12px;padding:16px;border:1px solid #3A3A3E}
@@ -78,42 +45,15 @@ button.ghost{background:#3A3A40;color:#F2DFA0}
 .lyrics{transition:max-height 0.3s ease, padding 0.3s ease;}  
 code{background:#333333;color:#F2DFA0;padding:2px 6px;border-radius:6px} .how{color:#D0D0D0;line-height:1.9} .how li{margin:6px 0}
 @media(min-width:821px){
-  body{
-    padding-top: 96px;
-  }
-  .wrap{
-    height: calc(100vh - 116px);
-    align-items: start;
-  }
-  .wrap .card{
-    max-height: 100%;
-    overflow-y: auto;
-  }
-  #playerCard{
-    overflow-y: auto;
-  }
+  body{padding-top: 96px;}
+  .wrap{height: calc(100vh - 116px);align-items: start;}
+  .wrap .card{max-height: 100%;overflow-y: auto;}
+  #playerCard{overflow-y: auto;}
 }
 @media(max-width:820px){
-  .controls{
-    position: fixed !important;
-    top: 92px !important;
-    left: 0 !important;
-    right: 0 !important;
-    z-index: 100 !important;
-    background: #F2DFA0 !important;
-    background-color: #F2DFA0 !important;
-    opacity: 1 !important;
-    border-bottom: 1px solid #D9C47E;
-    padding: 10px 12px !important;
-    margin: 0 !important;
-  }
-  body{
-    padding-top: 0;
-  }
-  #playerCard.lyrics-open .lyrics{
-    max-height: 220px;
-    overflow-y: auto;
-  }
+  .controls{position: fixed !important;top: 92px !important;left: 0 !important;right: 0 !important;z-index: 100 !important;background: #F2DFA0 !important;background-color: #F2DFA0 !important;opacity: 1 !important;border-bottom: 1px solid #D9C47E;padding: 10px 12px !important;margin: 0 !important;}
+  body{padding-top: 0;}
+  #playerCard.lyrics-open .lyrics{max-height: 220px;overflow-y: auto;}
 }
 </style>
 </head>
@@ -133,4 +73,135 @@ code{background:#333333;color:#F2DFA0;padding:2px 6px;border-radius:6px} .how{co
     <p class="sub" id="credits" style="font-size:14px; color:#A8A8A8; margin:0; line-height:1.3; display:none;"></p>
     <div style="display:flex;justify-content:space-between;align-items:center; margin-bottom:8;">
   <h3 style="margin:12px 0;color:#FFFFFF;">歌詞 / 歌曲說明</h3>
-  <button id="lyricsToggle" class="ghost" style="padding:6px 
+  <button id="lyricsToggle" class="ghost" style="padding:6px 12px;font-size:13px;">展開 ▼</button>
+</div>
+<div class="lyrics" id="lyrics"></div>
+  </div>
+</div>
+<script>
+let songs=[], current=0, auto=true, filtered=[];
+const MODE_SETTINGS = {"鋼琴演示":"show","吉他彈唱":"show","官方正式":"hide"};
+const list=document.getElementById('list'), player=document.getElementById('player');
+function syncModeOptions(){ const sel=document.getElementById('filter'); [...sel.options].forEach(o=>{ if(o.value==="全部") return; o.hidden = (MODE_SETTINGS[o.text]==="hide"); }); if(MODE_SETTINGS[sel.value]==="hide") sel.value="全部"; }
+async function load(){
+  try{
+    const r = await fetch('songs.json');
+    if(!r.ok) throw new Error('songs.json HTTP ' + r.status);
+    songs = await r.json();
+    if(!Array.isArray(songs) || songs.length===0) throw new Error('songs.json 是空的');
+    syncModeOptions(); applyFilter(); play(0);
+  }catch(e){
+    console.error(e);
+    list.innerHTML = '<p style="padding:12px;line-height:1.8;color:#FFB0B0">載入失敗：找不到 songs.json<br>請確認 songs.json 跟 index.html 在同一個資料夾，<br>且 https://mirien-style.github.io/poetry/songs.json 能直接打開。</p>';
+    document.getElementById('title').innerHTML = '<span class="t-work">載入失敗</span><span class="t-ver"></span>';
+  }
+}
+function applyFilter(){ const q=document.getElementById('search').value.trim(); const f=document.getElementById('filter').value; const fs=document.getElementById('filterStatus').value;
+  filtered=songs.filter(s=>{ if(MODE_SETTINGS[s.category]==="hide") return false; let ok=true; if(fs==='已上架') ok=s.status!=="未上架"; else if(fs==='未上架') ok=s.status==="未上架"; if(f!=='全部') ok=ok&&s.category===f; return ok&&(!q||(s.work||s.title).includes(q)||s.version.includes(q)); }); renderList(); }
+function renderList(){
+    list.innerHTML = filtered.map((s, displayIdx) => {
+    const idx = songs.indexOf(s);
+    const isComing = s.status === "未上架";
+    return `<button class="song ${idx===current?'active':''} ${isComing?'coming':''}" onclick="play(${idx})">
+      <span class="num">${displayIdx+1}</span>
+      <span style="flex:1"><b>${s.work}</b><br>
+      <small style="color:#A8A8A8">${s.version}</small></span>
+      ${isComing ? `<span class="tag coming-tag">未上架</span>` : `<span class="tag">${s.status}</span>`}
+    </button>`
+  }).join('');
+}
+function play(i){ if(!songs[i])return; current=i; const s=songs[i]; 
+  if(s.status === "未上架"){
+    document.getElementById('title').innerHTML = '<span class="t-work">' + s.work + '</span><span class="t-ver">(' + s.version + ')</span>';
+    document.getElementById('meta').textContent = s.year ? '創作年份．' + s.year : '未上架，敬請期待';
+    document.getElementById('lyrics').textContent = '這首還在準備中，錄好後就會在這裡上架。';
+    document.getElementById('credits').innerHTML = '詞：' + (s.lyricist || '—') + '<br>曲：' + (s.composer || '—');
+    const c1 = document.getElementById('cover');
+    c1.style.backgroundImage = 'none';
+    c1.style.background = s.coverColor || '#F2DFA0';
+    c1.textContent = '♪';
+    player.removeAttribute('src');
+    player.load();
+    renderList();
+    syncDesktopHeight();
+    updatePlayerMode();
+    return;
+  }
+document.getElementById('title').innerHTML='<span class="t-work">' + (s.work||s.title) + '</span><span class="t-ver">(' + s.version + ')</span>';   
+document.getElementById('meta').textContent = s.year ? '創作年份．' + s.year : '';
+document.getElementById('credits').innerHTML = '詞：' + (s.lyricist || '—') + '<br>曲：' + (s.composer || '—');
+document.getElementById('lyrics').textContent = '載入中...';
+if(s.lyricsFile){
+  fetch(s.lyricsFile).then(r => r.text()).then(t => { document.getElementById('lyrics').textContent = t; }).catch(()=>{ document.getElementById('lyrics').textContent = s.lyrics || ''; });
+} else {
+  document.getElementById('lyrics').textContent = s.lyrics || '';
+} const c=document.getElementById('cover');
+c.style.background = '';
+c.style.backgroundImage = "url('images/cover.jpg?v=2')";
+c.textContent = ''; player.src=s.audio; renderList(); syncDesktopHeight(); updatePlayerMode(); }
+document.getElementById('search').addEventListener('input',applyFilter); 
+document.getElementById('filter').addEventListener('change',applyFilter);
+document.getElementById('filterStatus').addEventListener('change',applyFilter); 
+let lyricsOpen = false;
+const lyricsBox = document.getElementById('lyrics');
+const lyricsBtn = document.getElementById('lyricsToggle');
+lyricsBox.classList.add('collapsed');
+lyricsBtn.textContent = '展開 ▼';
+const playerCard = document.getElementById('playerCard');
+function updatePlayerMode(){
+  const wrapEl = document.querySelector('.wrap');
+  const listCard = document.querySelector('.wrap .card:first-child');
+  if(window.innerWidth > 820){
+    document.body.style.paddingTop = '';
+    if(wrapEl) wrapEl.style.paddingTop = '';
+    if(listCard) listCard.style.marginTop = '';
+    playerCard.style.position = '';
+    playerCard.style.top = '';
+    playerCard.style.left = '';
+    playerCard.style.right = '';
+    playerCard.style.zIndex = '';
+    playerCard.style.maxHeight = '';
+    playerCard.style.overflowY = '';
+    playerCard.classList.remove('lyrics-open');
+    return;
+  }
+  const controls = document.querySelector('.controls');
+  document.body.style.paddingTop = '0px';
+  if(listCard) listCard.style.marginTop = '0px';
+  const bottom = controls ? controls.getBoundingClientRect().bottom : 204;
+  playerCard.style.position = 'fixed';
+  playerCard.style.top = bottom + 'px';
+  playerCard.style.left = '12px';
+  playerCard.style.right = '12px';
+  playerCard.style.zIndex = '101';
+  playerCard.style.maxHeight = '';
+  playerCard.style.overflowY = 'visible';
+  if(lyricsOpen){ playerCard.classList.add('lyrics-open'); } else { playerCard.classList.remove('lyrics-open'); }
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      const playerBottom = playerCard.getBoundingClientRect().bottom;
+      if(wrapEl) wrapEl.style.paddingTop = (playerBottom + 12) + 'px';
+    });
+  });
+}
+function syncDesktopHeight(){
+  if(window.innerWidth <= 820) return;
+  const listCard = document.querySelector('.wrap .card:first-child');
+  if(!listCard) return;
+  if(!lyricsOpen){
+    playerCard.style.height = '';
+    requestAnimationFrame(() => { playerCard.style.height = listCard.offsetHeight + 'px'; });
+  } else { playerCard.style.height = ''; }
+}
+lyricsBtn.onclick = () => {
+  lyricsOpen = !lyricsOpen;
+  if(lyricsOpen){ lyricsBox.classList.remove('collapsed'); lyricsBtn.textContent = '收起 ▲'; }
+  else { lyricsBox.classList.add('collapsed'); lyricsBtn.textContent = '展開 ▼'; }
+  updatePlayerMode();
+  syncDesktopHeight();
+};
+window.addEventListener('resize', () => { updatePlayerMode(); syncDesktopHeight(); });
+window.addEventListener('load', () => { updatePlayerMode(); syncDesktopHeight(); });
+load();
+</script>
+</body></html>
