@@ -113,6 +113,14 @@ code{background:#333333;color:#F2DFA0;padding:2px 6px;border-radius:6px} .how{co
   .lyrics-modal{padding:16px;}
   .lyrics-modal-card{max-height:80vh;padding:28px 18px 20px;}
 }
+/* 手機版最終覆蓋：一定要放在最後面，不然會被上面共用的 18px 蓋掉 */
+@media(max-width:820px){
+  #playerCard h2#title{margin:2px 0 0 !important;gap:2px !important;line-height:1.2 !important;padding:0 !important;}
+  #playerCard h2#title .t-work{font-size:21px !important;line-height:1.2 !important;margin:0 !important;padding:0 !important;}
+  #playerCard h2#title .t-ver{font-size:13px !important;line-height:1.2 !important;margin:0 !important;padding:0 !important;}
+  #playerCard audio{margin:0 0 2px !important;}
+  #playerCard .cover{margin-bottom:0 !important;}
+}
 </style>
 </head>
 <body>
