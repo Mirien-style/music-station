@@ -181,7 +181,7 @@ code{background:#333333;color:#FF8C42;padding:2px 6px;border-radius:6px} .how{co
   </div>
   <div class="card" id="playerCard">
     <div id="cover" class="cover" style="background-color:#FF8C42;">♪</div>
-    <h2 id="title"><span class="t-work">未選擇曲目</span><span class="t-ver">(請從撥放清單中選擇曲目)</span></h2>
+    <h2 id="title"><span class="t-work">未選擇曲目</span><span class="t-ver">(請從播放清單中選擇曲目進行播放)</span></h2>
     <audio id="player" controls preload="none"></audio>
     <p class="sub" id="meta" style="margin:8px 0 0;"></p>
     <p class="sub" id="credits" style="font-size:14px; color:#A8A8A8; margin:0; line-height:1.3; display:none;"></p>
@@ -292,7 +292,7 @@ openLyricsBtn.addEventListener('click', openLyricsModal);
 function syncModeOptions(){ const sel=document.getElementById('filter'); [...sel.options].forEach(o=>{ if(o.value==="全部") return; o.hidden = (MODE_SETTINGS[o.text]==="hide"); }); if(MODE_SETTINGS[sel.value]==="hide") sel.value="全部"; }
 /* 未選歌時的括號：電腦跟手機不一樣 */
 function getEmptySub(){
-  if(window.innerWidth > 820) return '(請從撥放清單中選擇曲目)';
+  if(window.innerWidth > 820) return '(請從播放清單中選擇曲目進行播放)';
   return '(請開啟播放清單，選擇欲聆聽的曲目)';
 }
 /* 剛開網頁：不要載入任何歌，封面就是色塊+音符，歌詞按鈕藏起來，播放器留著但沒有音訊 */
