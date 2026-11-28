@@ -75,7 +75,8 @@ h2{margin:14px 0 4px;font-size:26px;display:flex;justify-content:space-between;a
 .lyrics-modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,0.55);}
 .lyrics-modal-card{position:relative;background:#FFFFFF;color:#333333;width:100%;max-width:560px;max-height:78vh;overflow-y:auto;border-radius:16px;padding:30px 24px 24px;box-shadow:0 12px 40px rgba(0,0,0,0.35);}
 .lyrics-modal-close{position:absolute;top:10px;right:12px;background:transparent;border:0;font-size:22px;line-height:1;color:#333333;cursor:pointer;padding:6px 8px;}
-.lyrics-modal-title{margin:0 24px 16px 0;font-size:20px;font-weight:800;color:#333333;text-align:center !important;}
+/* 浮窗歌名：真正置於浮窗正中間，左右對稱，不再被 ✕ 推歪 */
+.lyrics-modal-title{margin:0 0 16px 0 !important;padding:0 32px !important;width:100% !important;box-sizing:border-box !important;font-size:20px;font-weight:800;color:#333333;text-align:center !important;}
 /* 浮窗裡的模式那行 (鋼琴演示) 不要顯示 */
 .lyrics-modal-sub{display:none !important;margin:0 !important;padding:0 !important;height:0 !important;overflow:hidden;}
 .lyrics-modal-text{white-space:pre-wrap;line-height:2;font-size:15px;color:#333333;margin:0;}
