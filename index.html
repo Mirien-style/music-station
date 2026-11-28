@@ -23,4 +23,30 @@ header p{color:#A8A8A8;margin:8px 0 0}
 }  /* 播放器放上面 */}
 .card{background:#26262B;border:1px solid #3A3A3E;border-radius:18px;padding:16px;box-shadow:0 4px 18px rgba(0,0,0,0.35)}
 .controls{display:flex;gap:8px;flex-wrap:wrap;position:sticky;top:-16px;z-index:20;background:#F2DFA0 !important;background-color:#F2DFA0 !important;opacity:1 !important;margin:-16px -16px 12px;padding:16px;border-bottom:1px solid #D9C47E} 
-input{flex:1 1 100%;min
+input{flex:1 1 100%;min-width:0;background:#1E1E22;color:#F2F2F2;border:1px solid #3A3A3E;border-radius:10px;padding:10px}
+select{flex:1 1 0;min-width:0;background:#1E1E22;color:#F2F2F2;border:1px solid #3A3A3E;border-radius:10px;padding:10px}
+.song{width:100%;text-align:left;background:transparent;border:1px solid transparent;color:#F2F2F2;padding:12px;border-radius:12px;cursor:pointer;display:flex;gap:10px;align-items:center}
+.song.active,.song:hover{background:#3A3A40;border-color:#F2DFA0}
+.num{width:26px;height:26px;border-radius:50%;background:#F2DFA0;color:#2A2410;display:grid;place-items:center;font-size:13px;flex-shrink:0}
+.tag{font-size:12px;background:#F2DFA0;color:#2A2410;padding:3px 8px;border-radius:99px;white-space:nowrap}
+.cover{height:260px;border-radius:14px;display:grid;place-items:center;font-size:64px;font-weight:900;color:#2A2410;background-size:cover;background-position:center 38%;}
+@media(max-width:820px){
+  .cover{height:150px !important; border-radius:0; margin:-0px -16px 0 -16px;}
+}
+h2{margin:14px 0 4px;font-size:26px;display:flex;justify-content:space-between;align-items:baseline;gap:12px;color:#FFFFFF} .sub{color:#A8A8A8;margin:0 0 14px}
+/* 播放器歌名：置中、上下兩排 */
+#playerCard h2#title{
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  justify-content:center !important;
+  text-align:center !important;
+  gap:4px !important;
+  margin:18px 0 10px !important;
+  line-height:1.3 !important;
+}
+#title .t-work{display:block !important;width:100%;text-align:center !important;font-size:26px;font-weight:800;color:#FFFFFF;}
+#title .t-ver{display:block !important;width:100%;text-align:center !important;font-size:16px;font-weight:500;color:#A8A8A8;}
+/* 置中歌名下面那顆「點我開啟」按鈕，也置中 */
+.open-lyrics-wrap{text-align:center !important;margin:14px 0 6px;}
+#openLyricsBtn{display:inline-block;background:#F2DFA0;color:#2A2410;font-weight:800;font-size:15px;padding:12px 22px;border-radius:99px;text-decoration
