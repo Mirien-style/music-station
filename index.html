@@ -304,8 +304,8 @@ function updatePlayerMode(){
   if(listCardEl) listCardEl.style.marginTop = '0px';
   const bottom = controls ? controls.getBoundingClientRect().bottom : 184;
   playerCard.style.position = 'fixed';
-  /* 整個播放區往下 10px，黃色搜尋列和封面中間留一個乾淨空隙 */
-  playerCard.style.top = (bottom + 10) + 'px';
+  /* 手機版播放區往下移：搜尋列底部 +24px，剛好讓開那顆卡在界線上的播放清單按鈕，不再遮到它 */
+  playerCard.style.top = (bottom + 24) + 'px';
   playerCard.style.left = '12px';
   playerCard.style.right = '12px';
   playerCard.style.zIndex = '101';
